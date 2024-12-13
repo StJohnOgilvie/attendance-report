@@ -30,21 +30,28 @@
             text-align: center;
             padding: 15px;
             position: relative;
+            background-image: url('https://lh3.googleusercontent.com/iUJc4-ichwHWN5_zme-arE7ZT8foYRm44qfGKRtEqjdM4jRX9oMlzMgNb_pH-AcZes_nY8MKnixeGApX-bgW7b6AF1tL4npmvgNUFv7w91-Gh4gdNIQdQovTJdn1G3Iv4Q=w1280');
+            background-size: 200px 200px;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 1;
         }
 
-        .header img {
-            width: 50px;
-            height: 50px;
+        .header::before {
+            content: '';
             position: absolute;
-            top: 10px;
-            right: 10px;
-            border-radius: 50%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.7); /* Adjusts transparency */
+            z-index: 0;
         }
 
-        .header .week-beginning {
-            margin-top: 10px;
-            font-size: 16px;
-            font-weight: bold;
+        .header h1,
+        .header p {
+            position: relative;
+            z-index: 1;
         }
 
         .info-section {
@@ -182,7 +189,6 @@
             <h1>Attendance Report</h1>
             <p>St John Ogilvie High School</p>
             <p class="week-beginning">Week Beginning: 18th December 2024</p>
-            <img src="https://lh3.googleusercontent.com/iUJc4-ichwHWN5_zme-arE7ZT8foYRm44qfGKRtEqjdM4jRX9oMlzMgNb_pH-AcZes_nY8MKnixeGApX-bgW7b6AF1tL4npmvgNUFv7w91-Gh4gdNIQdQovTJdn1G3Iv4Q=w1280" alt="School Badge">
         </div>
 
         <div class="info-section">
