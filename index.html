@@ -25,14 +25,14 @@
         }
 
         .header {
-            background-color: #228B22; /* Header background colour */
+            background-color: #228B22;
             position: relative;
             color: white;
             text-align: center;
             padding: 15px;
         }
 
-        .header::after {
+        .header::before {
             content: "";
             position: absolute;
             top: 0;
@@ -42,13 +42,14 @@
             background-image: url('https://lh3.googleusercontent.com/iUJc4-ichwHWN5_zme-arE7ZT8foYRm44qfGKRtEqjdM4jRX9oMlzMgNb_pH-AcZes_nY8MKnixeGApX-bgW7b6AF1tL4npmvgNUFv7w91-Gh4gdNIQdQovTJdn1G3Iv4Q=w1280');
             background-size: 100px; /* Adjust image size */
             background-repeat: no-repeat;
-            background-position: right center; /* Position image on the right and vertically centred */
+            background-position: right center; /* Position image on the right and centred vertically */
             opacity: 0.5; /* Make only the image 50% transparent */
             pointer-events: none; /* Ensure the image does not interfere with interactions */
             z-index: 0;
         }
 
-        .header h1, .header p {
+        .header h1,
+        .header p {
             position: relative;
             z-index: 1; /* Ensure text stays above the image */
             margin: 0;
