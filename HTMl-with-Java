@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Report</title>
+    <style>
+        /* Your existing CSS styles here */
+    </style>
+    <script>
+        // Function to parse query parameters
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            const data = {};
+            params.forEach((value, key) => {
+                data[key] = decodeURIComponent(value);
+            });
+            return data;
+        }
+
+        // Function to update the HTML with query data
+        function populateData() {
+            const data = getQueryParams();
+
+            // Update main fields
+            document.querySelector('.name').textContent = data.name || 'Unknown';
+            document.querySelector('.stage').textContent = data.stage || '-';
+            document.querySelector('.tutor').textContent = data.tutor || '-';
+            document.querySelector('.attendance').textContent = data.attendance || '-';
+            document.querySelector('.attendance-rating').textContent = data.rating || '-';
+            document.querySelector('.week-beginning').textContent = `Week Beginning: ${data.weekbeginning || '-'}`;
+
+            // Update attendance table
+            const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+            days.forEach(day => {
+                for (let i = 1; i <= 7; i++) {
+                    const cell = document.querySelector(`.${day}-period${i}`);
+                    if (cell) cell.textContent = data[`${day}${i}`] || '-';
+                }
+            });
+        }
+
+        // Populate data on page load
+        window.onload = populateData;
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-background"></div>
+            <h1>Attendance Report</h1>
+            <p>St John Ogilvie High School</p>
+        </div>
+
+        <div class="info-section">
+            <div class="name">[Name Placeholder]</div>
+
+            <div class="info-box">
+                <div class="info-item">
+                    <div class="header">Stage</div>
+                    <div class="body stage">[Stage Placeholder]</div>
+                </div>
+                <div class="info-item">
+                    <div class="header">Tutor</div>
+                    <div class="body tutor">[Tutor Placeholder]</div>
+                </div>
+                <div class="info-item">
+                    <div class="header">Attendance</div>
+                    <div class="body attendance">[Attendance Placeholder]</div>
+                </div>
+                <div class="info-item">
+                    <div class="header">Attendance Rating</div>
+                    <div class="body attendance-rating">[Rating Placeholder]</div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <p class="week-beginning" style="text-align: center; font-weight: bold; margin-bottom: 5px;">
+            Week Beginning: [Week Beginning Placeholder]
+        </p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        <th>6</th>
+                        <th>7</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Monday</strong></td>
+                        <td class="monday-period1">-</td>
+                        <td class="monday-period2">-</td>
+                        <td class="monday-period3">-</td>
+                        <td class="monday-period4">-</td>
+                        <td class="monday-period5">-</td>
+                        <td class="monday-period6">-</td>
+                        <td class="monday-period7">-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tuesday</strong></td>
+                        <td class="tuesday-period1">-</td>
+                        <td class="tuesday-period2">-</td>
+                        <td class="tuesday-period3">-</td>
+                        <td class="tuesday-period4">-</td>
+                        <td class="tuesday-period5">-</td>
+                        <td class="tuesday-period6">-</td>
+                        <td class="tuesday-period7">-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Wednesday</strong></td>
+                        <td class="wednesday-period1">-</td>
+                        <td class="wednesday-period2">-</td>
+                        <td class="wednesday-period3">-</td>
+                        <td class="wednesday-period4">-</td>
+                        <td class="wednesday-period5">-</td>
+                        <td class="wednesday-period6">-</td>
+                        <td class="wednesday-period7">-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Thursday</strong></td>
+                        <td class="thursday-period1">-</td>
+                        <td class="thursday-period2">-</td>
+                        <td class="thursday-period3">-</td>
+                        <td class="thursday-period4">-</td>
+                        <td class="thursday-period5">-</td>
+                        <td class="thursday-period6">-</td>
+                        <td class="thursday-period7">-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Friday</strong></td>
+                        <td class="friday-period1">-</td>
+                        <td class="friday-period2">-</td>
+                        <td class="friday-period3">-</td>
+                        <td class="friday-period4">-</td>
+                        <td class="friday-period5">-</td>
+                        <td class="friday-period6">-</td>
+                        <td class="friday-period7">-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
