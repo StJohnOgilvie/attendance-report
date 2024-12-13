@@ -6,7 +6,183 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>St John Ogilvie Attendance Report</title>
     <style>
-        /* Existing styles remain unchanged */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 95%;
+            margin: 20px auto;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background-color: #228B22;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: relative;
+            overflow: hidden; /* Constrain the background image to this section */
+        }
+
+        .header-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://lh3.googleusercontent.com/iUJc4-ichwHWN5_zme-arE7ZT8foYRm44qfGKRtEqjdM4jRX9oMlzMgNb_pH-AcZes_nY8MKnixeGApX-bgW7b6AF1tL4npmvgNUFv7w91-Gh4gdNIQdQovTJdn1G3Iv4Q=w1280');
+            background-size: 100px; /* Adjust badge size */
+            background-repeat: no-repeat;
+            background-position: right center; /* Place badge on the right */
+            opacity: 0.5; /* 50% transparency */
+            pointer-events: none; /* Prevent interactions */
+            z-index: 0; /* Place the image behind the text */
+        }
+
+        .header h1,
+        .header p {
+            position: relative;
+            z-index: 1; /* Ensure text stays above the background image */
+            margin: 0;
+        }
+
+        .info-section {
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 90%;
+        }
+
+        .name {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            display: flex;
+            justify-content: space-around;
+            gap: 15px;
+        }
+
+        .info-box .info-item {
+            text-align: center;
+            min-width: 120px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-box .info-item .header {
+            background: #228B22;
+            color: white;
+            font-weight: bold;
+            padding: 10px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .info-box .info-item .body {
+            background: white;
+            color: #333;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #ddd;
+            margin: 0px 0;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 90%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 8px;
+            font-size: 14px;
+        }
+
+        th {
+            background: #228B22;
+            color: white;
+        }
+
+        .legend {
+            margin-top: 10px;
+        }
+
+        .legend table {
+            width: 90%;
+            margin: 20px auto;
+        }
+
+        .legend th {
+            background: #228B22;
+            color: white;
+        }
+
+        .legend td {
+            text-align: left;
+        }
+
+        .legend td:first-child {
+            text-align: center;
+            width: 50px;
+        }
+
+        a.button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #000000;
+            color: #FFD700;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 5px;
+            margin-top: 0px;
+        }
+
+        a.button:hover {
+            background: #333333;
+        }
+
+        .button-container {
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .info-box {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .info-box .info-item {
+                flex: 1 1 calc(50% - 10px);
+                max-width: calc(50% - 10px);
+            }
+        }
     </style>
 </head>
 
@@ -16,6 +192,7 @@
             <div class="header-background"></div>
             <h1>Attendance Report</h1>
             <p>St John Ogilvie High School</p>
+            <p class="week-beginning">Week Beginning: 18th December 2024</p>
         </div>
 
         <div class="info-section">
@@ -42,9 +219,6 @@
         </div>
 
         <hr>
-
-        <!-- Week Beginning Section Moved -->
-        <p class="week-beginning" style="text-align: center; font-weight: bold; margin-top: 10px;">Week Beginning: 18th December 2024</p>
 
         <div class="table-wrapper">
             <table>
