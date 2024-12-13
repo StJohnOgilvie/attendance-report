@@ -1,599 +1,335 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>St John Ogilvie Attendance Report</title>
-
     <style>
-
         body {
-
             font-family: Arial, sans-serif;
-
             margin: 0;
-
             padding: 0;
-
             background-color: #f9f9f9;
-
             color: #333;
-
             padding: 10px;
-
         }
-
-
 
         .container {
-
             max-width: 800px;
-
             width: 95%;
-
             margin: 20px auto;
-
             background: #ffffff;
-
             border-radius: 10px;
-
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-
             overflow: hidden;
-
         }
-
-
 
         .header {
-
             background: #228B22;
-
             color: white;
-
             text-align: center;
-
             padding: 15px;
-
             position: relative;
-
+            background-image: url('https://lh3.googleusercontent.com/iUJc4-ichwHWN5_zme-arE7ZT8foYRm44qfGKRtEqjdM4jRX9oMlzMgNb_pH-AcZes_nY8MKnixeGApX-bgW7b6AF1tL4npmvgNUFv7w91-Gh4gdNIQdQovTJdn1G3Iv4Q=w1280');
+            background-repeat: no-repeat;
+            background-position: right center;
+            background-size: 100px;
+            background-blend-mode: lighten;
+            opacity: 1;
         }
 
-
-
-        .header img {
-
-            width: 100px;
-
-            height: 100px;
-
-            position: absolute;
-
-            top: 10px;
-
-            right: 10px;
-
-            border-radius: 50%;
-
-            opacity: 0.3;
-            
-            z-index: -1;
-
+        .header h1,
+        .header p {
+            margin: 0;
+            z-index: 1;
+            position: relative;
         }
-
-
 
         .header .week-beginning {
-
             margin-top: 10px;
-
             font-size: 16px;
-
             font-weight: bold;
-
         }
-
-
 
         .info-section {
-
             background: #f4f4f4;
-
             padding: 20px;
-
             border-radius: 10px;
-
             margin: 20px auto;
-
             width: 90%;
-
         }
-
-
 
         .name {
-
             text-align: center;
-
             font-size: 24px;
-
             font-weight: bold;
-
             margin-bottom: 20px;
-
         }
-
-
 
         .info-box {
-
             display: flex;
-
             justify-content: space-around;
-
             gap: 15px;
-
         }
-
-
 
         .info-box .info-item {
-
             text-align: center;
-
             min-width: 120px;
-
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
         }
-
-
 
         .info-box .info-item .header {
-
             background: #228B22;
-
             color: white;
-
             font-weight: bold;
-
             padding: 10px;
-
             border-top-left-radius: 8px;
-
             border-top-right-radius: 8px;
-
         }
-
-
 
         .info-box .info-item .body {
-
             background: white;
-
             color: #333;
-
             padding: 10px;
-
             border: 1px solid #ddd;
-
             border-top: none;
-
             border-bottom-left-radius: 8px;
-
             border-bottom-right-radius: 8px;
-
         }
-
-
 
         hr {
-
             border: 0;
-
             border-top: 1px solid #ddd;
-
             margin: 0px 0;
-
         }
-
-
 
         .table-wrapper {
-
             overflow-x: auto;
-
         }
-
-
 
         table {
-
             width: 90%;
-
             border-collapse: collapse;
-
             margin: 20px auto;
-
         }
 
-
-
-        th, td {
-
+        th,
+        td {
             border: 1px solid #ddd;
-
             text-align: center;
-
             padding: 8px;
-
             font-size: 14px;
-
         }
-
-
 
         th {
-
             background: #228B22;
-
             color: white;
-
         }
-
-
 
         .legend {
-
             margin-top: 10px;
-
         }
-
-
 
         .legend table {
-
             width: 90%;
-
             margin: 20px auto;
-
         }
-
-
 
         .legend th {
-
             background: #228B22;
-
             color: white;
-
         }
-
-
 
         .legend td {
-
             text-align: left;
-
         }
-
-
 
         .legend td:first-child {
-
             text-align: center;
-
             width: 50px;
-
         }
-
-
 
         a.button {
-
             display: inline-block;
-
             padding: 10px 20px;
-
             background: #000000;
-
             color: #FFD700;
-
             text-decoration: none;
-
             text-align: center;
-
             border-radius: 5px;
-
             margin-top: 0px;
-
         }
-
-
 
         a.button:hover {
-
             background: #333333;
-
         }
-
-
 
         .button-container {
-
             text-align: center;
-
         }
-
-
 
         @media (max-width: 600px) {
-
             .info-box {
-
                 flex-wrap: wrap;
-
                 gap: 10px;
-
             }
-
-
 
             .info-box .info-item {
-
                 flex: 1 1 calc(50% - 10px);
-
                 max-width: calc(50% - 10px);
-
             }
-
         }
-
     </style>
-
 </head>
 
 <body>
-
     <div class="container">
-
         <div class="header">
-
             <h1>Attendance Report</h1>
-
             <p>St John Ogilvie High School</p>
-
             <p class="week-beginning">Week Beginning: 18th December 2024</p>
-
-            <img src="https://lh3.googleusercontent.com/iUJc4-ichwHWN5_zme-arE7ZT8foYRm44qfGKRtEqjdM4jRX9oMlzMgNb_pH-AcZes_nY8MKnixeGApX-bgW7b6AF1tL4npmvgNUFv7w91-Gh4gdNIQdQovTJdn1G3Iv4Q=w1280" alt="School Badge">
-
         </div>
-
-
 
         <div class="info-section">
-
             <div class="name">Joe Bloggs</div>
 
-
-
             <div class="info-box">
-
                 <div class="info-item">
-
                     <div class="header">Stage</div>
-
                     <div class="body">S1</div>
-
                 </div>
-
                 <div class="info-item">
-
                     <div class="header">Tutor</div>
-
                     <div class="body">1A</div>
-
                 </div>
-
                 <div class="info-item">
-
                     <div class="header">Attendance</div>
-
                     <div class="body">98%</div>
-
                 </div>
-
                 <div class="info-item">
-
                     <div class="header">Attendance Rating</div>
-
                     <div class="body">Excellent</div>
-
                 </div>
-
             </div>
-
         </div>
-
-
 
         <hr>
 
-
-
         <div class="table-wrapper">
-
             <table>
-
                 <thead>
-
                     <tr>
-
                         <th>Day</th>
-
                         <th>1</th>
-
                         <th>2</th>
-
                         <th>3</th>
-
                         <th>4</th>
-
                         <th>5</th>
-
                         <th>6</th>
-
                         <th>7</th>
-
                     </tr>
-
                 </thead>
-
                 <tbody>
-
                     <tr>
-
                         <td><strong>Monday</strong></td>
-
-                        <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>T</td><td>-</td>
-
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>T</td>
+                        <td>-</td>
                     </tr>
-
                     <tr>
-
                         <td><strong>Tuesday</strong></td>
-
-                        <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>
-
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
                     </tr>
-
                     <tr>
-
                         <td><strong>Wednesday</strong></td>
-
-                        <td>T</td><td>T</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>
-
+                        <td>T</td>
+                        <td>T</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
                     </tr>
-
                     <tr>
-
                         <td><strong>Thursday</strong></td>
-
-                        <td>T</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>
-
+                        <td>T</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
                     </tr>
-
                     <tr>
-
                         <td><strong>Friday</strong></td>
-
-                        <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>
-
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
                     </tr>
-
                 </tbody>
-
             </table>
-
         </div>
-
-
 
         <div class="button-container">
-
             <a href="https://forms.office.com/e/YsFRTmdw3v" class="button">Click Here to Provide a Reason for Absence</a>
-
         </div>
-
-
 
         <div class="legend">
-
             <table>
-
                 <tr>
-
                     <th>Code</th>
-
                     <th>Meaning</th>
-
                 </tr>
-
                 <tr>
-
                     <td>H</td>
-
                     <td>Holiday</td>
-
                 </tr>
-
                 <tr>
-
                     <td>-</td>
-
                     <td>Present</td>
-
                 </tr>
-
                 <tr>
-
                     <td>~</td>
-
                     <td>Other in school activity</td>
-
                 </tr>
-
                 <tr>
-
                     <td>T</td>
-
                     <td>Absent</td>
-
                 </tr>
-
                 <tr>
-
                     <td>U</td>
-
                     <td>Unexplained Absence or Truancy</td>
-
                 </tr>
-
                 <tr>
-
                     <td>D</td>
-
                     <td>Self-Certified</td>
-
                 </tr>
-
                 <tr>
-
                     <td>J</td>
-
                     <td>Late to school (arrived after 8:50am)</td>
-
                 </tr>
-
                 <tr>
-
                     <td>P</td>
-
                     <td>Permission (Medical/Dental Appointment)</td>
-
                 </tr>
-
             </table>
-
         </div>
-
     </div>
-
 </body>
 
 </html>
