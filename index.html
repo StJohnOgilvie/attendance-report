@@ -25,16 +25,11 @@
         }
 
         .header {
-            background: #228B22;
-            color: white;
-            text-align: center;
-            padding: 15px;
             position: relative;
-            background-image: url('https://lh3.googleusercontent.com/iUJc4-ichwHWN5_zme-arE7ZT8foYRm44qfGKRtEqjdM4jRX9oMlzMgNb_pH-AcZes_nY8MKnixeGApX-bgW7b6AF1tL4npmvgNUFv7w91-Gh4gdNIQdQovTJdn1G3Iv4Q=w1280');
-            background-size: 200px 200px;
-            background-repeat: no-repeat;
-            background-position: center;
-            opacity: 1;
+            text-align: center;
+            color: white;
+            background-color: #228B22;
+            padding: 15px;
         }
 
         .header::before {
@@ -44,14 +39,17 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(255, 255, 255, 0.7); /* Adjusts transparency */
+            background: url('https://lh3.googleusercontent.com/iUJc4-ichwHWN5_zme-arE7ZT8foYRm44qfGKRtEqjdM4jRX9oMlzMgNb_pH-AcZes_nY8MKnixeGApX-bgW7b6AF1tL4npmvgNUFv7w91-Gh4gdNIQdQovTJdn1G3Iv4Q=w1280') no-repeat center;
+            background-size: 50%;
+            opacity: 0.3;
             z-index: 0;
         }
 
-        .header h1,
+        .header h1, 
         .header p {
             position: relative;
             z-index: 1;
+            margin: 0;
         }
 
         .info-section {
