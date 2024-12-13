@@ -12,7 +12,6 @@
             padding: 0;
             background-color: #f9f9f9;
             color: #333;
-            padding: 10px;
         }
 
         .container {
@@ -26,24 +25,33 @@
         }
 
         .header {
-            background: #228B22;
+            background-color: #228B22; /* Header background colour */
+            position: relative;
             color: white;
             text-align: center;
             padding: 15px;
-            position: relative;
-            background-image: url('https://lh3.googleusercontent.com/iUJc4-ichwHWN5_zme-arE7ZT8foYRm44qfGKRtEqjdM4jRX9oMlzMgNb_pH-AcZes_nY8MKnixeGApX-bgW7b6AF1tL4npmvgNUFv7w91-Gh4gdNIQdQovTJdn1G3Iv4Q=w1280');
-            background-repeat: no-repeat;
-            background-position: right center;
-            background-size: 100px;
-            background-blend-mode: screen;
-            opacity: 1;
         }
 
-        .header h1,
-        .header p {
-            margin: 0;
-            z-index: 1;
+        .header::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://lh3.googleusercontent.com/iUJc4-ichwHWN5_zme-arE7ZT8foYRm44qfGKRtEqjdM4jRX9oMlzMgNb_pH-AcZes_nY8MKnixeGApX-bgW7b6AF1tL4npmvgNUFv7w91-Gh4gdNIQdQovTJdn1G3Iv4Q=w1280');
+            background-size: 100px; /* Adjust image size */
+            background-repeat: no-repeat;
+            background-position: right center; /* Position image on the right and vertically centred */
+            opacity: 0.5; /* Make only the image 50% transparent */
+            pointer-events: none; /* Ensure the image does not interfere with interactions */
+            z-index: 0;
+        }
+
+        .header h1, .header p {
             position: relative;
+            z-index: 1; /* Ensure text stays above the image */
+            margin: 0;
         }
 
         .header .week-beginning {
