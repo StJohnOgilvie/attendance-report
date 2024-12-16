@@ -534,12 +534,82 @@
         </div>
     </div>
 
-    <script>
-        function toggleLegend() {
-            const legend = document.getElementById('legendTable');
-            legend.style.display = legend.style.display === 'none' ? 'block' : 'none';
+<script>
+    // Function to parse query parameters from the URL
+    function getQueryParams() {
+        const params = {};
+        const queryString = window.location.search.substring(1);
+        const pairs = queryString.split("&");
+
+        pairs.forEach(pair => {
+            const [key, value] = pair.split("=");
+            params[decodeURIComponent(key)] = decodeURIComponent(value || "");
+        });
+
+        return params;
+    }
+
+    // Function to update the HTML dynamically
+    function populateReport() {
+        const params = getQueryParams();
+
+        // Update name
+        if (params.forename && params.surname) {
+            const nameElement = document.querySelector('.name');
+            nameElement.textContent = `${params.forename} ${params.surname}`;
         }
-    </script>
+
+        // Update stage and tutor group
+        if (params.stage && params['®']) {
+            document.querySelectorAll('.info-item .body')[0].textContent = params.stage;
+            document.querySelectorAll('.info-item .body')[1].textContent = params['®'];
+        }
+
+        // Update attendance
+        if (params.att) {
+            document.querySelectorAll('.info-item .body')[2].textContent = `${params.att}%`;
+        }
+
+        // Update attendance rating
+        if (params.att_rating) {
+            document.querySelectorAll('.info-item .body')[3].textContent = params.att_rating || "N/A";
+        }
+
+        // Update timetable table
+        const days = ["mon", "tue", "wed", "thu", "fri"];
+        days.forEach((day, dayIndex) => {
+            for (let i = 1; i <= 7; i++) {
+                const cellValue = params[`${day}${i}`];
+                if (cellValue !== undefined) {
+                    const cell = document.querySelector(`tbody tr:nth-child(${dayIndex + 1}) td:nth-child(${i + 1})`);
+                    cell.textContent = cellValue || "-";
+                }
+            }
+        });
+
+        // Update week beginning
+        if (params.date) {
+            const dateElement = document.querySelector('.week-beginning h2');
+            const date = new Date(Number(params.date) * 86400000); // Assuming date is in Excel format
+            dateElement.textContent = `Week Beginning: ${date.toLocaleDateString("en-GB", {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            })}`;
+        }
+    }
+
+    // Function to toggle the visibility of the legend
+    function toggleLegend() {
+        const legend = document.getElementById('legendTable');
+        legend.style.display = legend.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // Run the populateReport function on page load
+    window.onload = populateReport;
+</script>
+
 </body>
 
 </html>
