@@ -36,8 +36,8 @@
         }
 
         .header img {
-            width: 100px;
-            height: 100px;
+            width: 0px;
+            height: 0px;
             position: absolute;
             top: 10px;
             right: 10px;
@@ -191,9 +191,26 @@
             width: 50px;
         }
 
-        .toggle-button {
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        a.button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #000000;
+            color: #FFD700;
+            text-decoration: none;
             text-align: center;
-            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        a.button:hover {
+            background: #333333;
         }
 
         .toggle-button button {
@@ -208,25 +225,6 @@
 
         .toggle-button button:hover {
             background: #1a6b18;
-        }
-
-        a.button {
-            display: inline-block;
-            padding: 10px 20px;
-            background: #000000;
-            color: #FFD700;
-            text-decoration: none;
-            text-align: center;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-
-        a.button:hover {
-            background: #333333;
-        }
-
-        .button-container {
-            text-align: center;
         }
 
         .alert-section {
@@ -389,14 +387,15 @@
                 </tbody>
             </table>
         </div>
-
+        <hr>
         <div class="button-container">
-            <a href="https://forms.office.com/e/YsFRTmdw3v" class="button">Click Here to Provide a Reason for Absence</a>
+            <a href="https://forms.office.com/e/YsFRTmdw3v" class="button">Submit Absence Reason</a>
+            <div class="toggle-button">
+                <button onclick="toggleLegend()">View Legend</button>
+            </div>
         </div>
 
-        <div class="toggle-button">
-            <button onclick="toggleLegend()">Click Here to View Legend</button>
-        </div>
+        <hr>
 
         <div class="legend" id="legendTable" style="display: none;">
             <table>
@@ -407,10 +406,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>H</td>
-                        <td>Holiday</td>
-                    </tr>
                     <tr>
                         <td>-</td>
                         <td>Present</td>
@@ -424,38 +419,42 @@
                         <td>Absent</td>
                     </tr>
                     <tr>
-                        <td>U</td>
-                        <td>Unexplained Absence or Truancy</td>
+                        <td>D</td>
+                        <td>Explained Absence (Reason provided by Parent/Carer)</td>
                     </tr>
                     <tr>
-                        <td>D</td>
-                        <td>Self-Certified</td>
+                        <td>U</td>
+                        <td>Truancy</td>
                     </tr>
                     <tr>
                         <td>J</td>
-                        <td>Late to school (arrived after 8:50am)</td>
+                        <td>Late to school (Arrived after 8:50am)</td>
                     </tr>
                     <tr>
                         <td>P</td>
                         <td>Permission (Medical/Dental Appointment)</td>
+                    </tr>
+                    <tr>
+                        <td>H</td>
+                        <td>Holiday</td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
         <div class="alert-section">
-            <h3>Attendance Misconceptions</h3>
-            <p>Did you know?</p>
+            <h3 style="text-align: center; font-weight: bold; text-decoration: underline;">Attendance Misconceptions</h3>
+            <p><strong>Did you know?</strong></p>
             <div class="key-points">
                 <ul>
-                    <li><strong>80% on a test = A</strong>, but <strong>80% attendance = missed about 2 months of
-                            learning</strong>.</li>
+                    <li><strong>80% on a test = A</strong>, but <strong>80% attendance = about 2 months of
+                            missed learning</strong>.</li>
                     <li><strong>15 minutes late every day = 50 hours of missed learning per year.</strong></li>
                 </ul>
             </div>
 
             <div class="missed-learning">
-                <h4>How much learning have I missed?</h4>
+                <h4>How much learning has been missed?</h4>
                 <table>
                     <thead>
                         <tr>
@@ -497,11 +496,7 @@
     <script>
         function toggleLegend() {
             const legend = document.getElementById('legendTable');
-            if (legend.style.display === 'none') {
-                legend.style.display = 'block';
-            } else {
-                legend.style.display = 'none';
-            }
+            legend.style.display = legend.style.display === 'none' ? 'block' : 'none';
         }
     </script>
 </body>
