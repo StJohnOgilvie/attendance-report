@@ -560,9 +560,9 @@
         }
 
         // Update stage and tutor group
-        if (params.stage && params['®']) {
+        if (params.stage && params['tutor']) {
             document.querySelectorAll('.info-item .body')[0].textContent = params.stage;
-            document.querySelectorAll('.info-item .body')[1].textContent = params['®'];
+            document.querySelectorAll('.info-item .body')[1].textContent = params['tutor'];
         }
 
         // Update attendance
@@ -582,7 +582,7 @@
                 const cellValue = params[`${day}${i}`];
                 if (cellValue !== undefined) {
                     const cell = document.querySelector(`tbody tr:nth-child(${dayIndex + 1}) td:nth-child(${i + 1})`);
-                    cell.textContent = cellValue || "-";
+                    cell.textContent = cellValue || "";
                 }
             }
         });
