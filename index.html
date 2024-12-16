@@ -22,15 +22,26 @@
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             overflow: hidden;
+            padding: 20px;
         }
 
         .header {
-            background-color: #228B22;
+            background: #228B22;
             color: white;
             text-align: center;
             padding: 15px;
             position: relative;
             overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .header img {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            border-radius: 50%;
         }
 
         .header-background {
@@ -55,16 +66,12 @@
             margin: 0;
         }
 
-        .header .week-beginning {
-            margin-top: 10px;
-        }
-
         .info-section {
             background: #f4f4f4;
             padding: 20px;
             border-radius: 10px;
-            margin: 20px auto;
-            width: 90%;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .name {
@@ -77,13 +84,28 @@
         .info-box {
             display: flex;
             justify-content: space-around;
+            flex-wrap: nowrap;
             gap: 15px;
         }
 
         .info-box .info-item {
-            text-align: center;
+            flex: 1 1 calc(22%); /* Adjust to roughly 4 items in one row */
+            max-width: calc(22%);
             min-width: 120px;
+            text-align: center;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .info-box {
+                flex-wrap: wrap;
+            }
+
+            .info-box .info-item {
+                flex: 1 1 calc(45% - 15px);
+                max-width: calc(45% - 15px);
+            }
         }
 
         .info-box .info-item .header {
@@ -108,7 +130,7 @@
         hr {
             border: 0;
             border-top: 1px solid #ddd;
-            margin: 0;
+            margin: 20px 0;
         }
 
         .table-wrapper {
@@ -116,9 +138,9 @@
         }
 
         table {
-            width: 90%;
+            width: 100%;
             border-collapse: collapse;
-            margin: 10px auto;
+            margin: 20px auto;
         }
 
         th,
@@ -139,7 +161,7 @@
         }
 
         .legend table {
-            width: 90%;
+            width: 100%;
             margin: 20px auto;
         }
 
@@ -165,7 +187,7 @@
             text-decoration: none;
             text-align: center;
             border-radius: 5px;
-            margin-top: 0;
+            margin-top: 10px;
         }
 
         a.button:hover {
@@ -176,32 +198,13 @@
             text-align: center;
         }
 
-        .divider {
-            height: 2px;
-            background: #ddd;
-            margin: 20px auto;
-            width: 90%;
-        }
-
-        .new-section {
-            padding: 20px;
-            text-align: center;
-            background: #f4f4f4;
-            margin-top: 20px;
-            border-radius: 10px;
-            width: 90%;
-            margin: 20px auto;
-        }
-
         .alert-section {
             background: #ffe5e5;
             color: #b22222;
             padding: 20px;
             border-radius: 10px;
-            margin: 20px auto;
-            text-align: center;
-            width: 90%;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .alert-section h3 {
@@ -236,7 +239,9 @@
             border-collapse: collapse;
         }
 
-        .alert-section table, .alert-section th, .alert-section td {
+        .alert-section table,
+        .alert-section th,
+        .alert-section td {
             border: 1px solid #b22222;
             text-align: center;
             padding: 8px;
@@ -255,11 +260,12 @@
             <div class="header-background"></div>
             <h1>Attendance Report</h1>
             <p>St John Ogilvie High School</p>
+            <img src="https://lh3.googleusercontent.com/iUJc4-ichwHWN5_zme-arE7ZT8foYRm44qfGKRtEqjdM4jRX9oMlzMgNb_pH-AcZes_nY8MKnixeGApX-bgW7b6AF1tL4npmvgNUFv7w91-Gh4gdNIQdQovTJdn1G3Iv4Q=w1280"
+                alt="School Badge">
         </div>
 
         <div class="info-section">
             <div class="name">Joe Bloggs</div>
-
             <div class="info-box">
                 <div class="info-item">
                     <div class="header">Stage</div>
@@ -281,8 +287,6 @@
         </div>
 
         <hr>
-
-        <p class="week-beginning" style="text-align: center; font-weight: bold; margin-bottom: 5px;">Week Beginning: 18th December 2024</p>
 
         <div class="table-wrapper">
             <table>
@@ -354,50 +358,7 @@
         </div>
 
         <div class="button-container">
-            <a href="https://forms.office.com/e/YsFRTmdw3v" class="button">Click Here to Provide a Reason for Absence</a>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="legend">
-            <table>
-                <tr>
-                    <th>Code</th>
-                    <th>Meaning</th>
-                </tr>
-                <tr>
-                    <td>-</td>
-                    <td>Present</td>
-                </tr>
-                <tr>
-                    <td>~</td>
-                    <td>Other in school activity</td>
-                </tr>
-                <tr>
-                    <td>T</td>
-                    <td>Absent</td>
-                </tr>
-                <tr>
-                    <td>U</td>
-                    <td>Unexplained Absence or Truancy</td>
-                </tr>
-                <tr>
-                    <td>D</td>
-                    <td>Self-Certified</td>
-                </tr>
-                <tr>
-                    <td>J</td>
-                    <td>Late to school (arrived after 8:50am)</td>
-                </tr>
-                <tr>
-                    <td>P</td>
-                    <td>Permission (Medical/Dental Appointment)</td>
-                </tr>
-                <tr>
-                    <td>H</td>
-                    <td>Holiday</td>
-                </tr>
-            </table>
+            <a href="#" class="button">Click Here to Provide a Reason for Absence</a>
         </div>
 
         <div class="alert-section">
@@ -405,7 +366,8 @@
             <p>Did you know?</p>
             <div class="key-points">
                 <ul>
-                    <li><strong>80% on a test = A</strong>, but <strong>80% attendance = missed about 2 months of learning</strong>.</li>
+                    <li><strong>80% on a test = A</strong>, but <strong>80% attendance = missed about 2 months of
+                            learning</strong>.</li>
                     <li><strong>15 minutes late every day = 50 hours of missed learning per year.</strong></li>
                 </ul>
             </div>
