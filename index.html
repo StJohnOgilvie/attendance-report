@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEST RATING1 St John Ogilvie Attendance Report</title>
+    <title>TEST CF1 St John Ogilvie Attendance Report</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -275,9 +275,6 @@
         
         
         
-        
-        
-        
         .alert-section th,
         .alert-section td {
             border: 1px solid #b22222;
@@ -289,7 +286,8 @@
             background: #228b22;
             color: white;
         }
-
+        
+        
 /* ############################################################################ */
 
 
@@ -330,6 +328,21 @@
 .very-poor {
     background-color: #b22222 !important; /* Dark Red */
     color: #ffffff !important; /* White text */
+}
+
+
+/* ############################################################################ */
+
+
+
+.t-red {
+    color: red;
+    font-weight: bold;
+}
+
+.j-amber {
+    color: #ffbf00; /* Amber Colour */
+    font-weight: bold;
 }
 
 
@@ -595,9 +608,8 @@
 
     </div>
 
+
 <script>
-
-
     
 // Function to parse query parameters from the URL
 function getQueryParams() {
@@ -700,16 +712,35 @@ function populateReport() {
     }
 }
 
+// Highlight specific characters ('T' and 'J') with styles
+function highlightAttendanceCodes() {
+    const tableCells = document.querySelectorAll(".table-wrapper table tbody td");
+    tableCells.forEach(cell => {
+        if (cell.textContent.trim() === 'T') {
+            cell.classList.add('t-red');
+        } else if (cell.textContent.trim() === 'J') {
+            cell.classList.add('j-amber');
+        }
+    });
+}
+
 // Function to toggle the visibility of the legend
 function toggleLegend() {
     const legend = document.getElementById('legendTable');
     legend.style.display = legend.style.display === 'none' ? 'block' : 'none';
 }
 
-// Run the populateReport function on page load
-window.onload = populateReport;
-
+// Run the populateReport function and highlight codes on page load
+window.onload = () => {
+    populateReport();
+    highlightAttendanceCodes();
+};
 </script>
+
+
+
+
+
 
 </body>
 
