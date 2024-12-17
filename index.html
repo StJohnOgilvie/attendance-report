@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>St John Ogilvie Attendance Report</title>
+    <title>TEST1 St John Ogilvie Attendance Report</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -310,16 +310,6 @@
         font-weight: bold;
       }
 
-      .attendance-T {
-        background-color: #FF6347;
-        /* Red background */
-        color: white;
-        /* White text for contrast */
-        font-weight: bold;
-        border-radius: 4px;
-        padding: 2px;
-        text-align: center;
-      }
     </style>
   </head>
   <body>
@@ -629,23 +619,13 @@ function populateReport() {
     ratingElement.classList.remove("excellent", "very-good", "good", "at-risk", "poor", "very-poor");
 
     // Add new class based on attendance rating
-  const attRating = params.att_rating?.trim().toLowerCase(); // Ensure lowercase & trim whitespace
-  
-  if (attRating === "excellent") ratingElement.classList.add("excellent");
-  else if (attRating === "very good") ratingElement.classList.add("very-good");
-  else if (attRating === "good") ratingElement.classList.add("good");
-  else if (attRating === "at risk") ratingElement.classList.add("at-risk");
-  else if (attRating === "poor") ratingElement.classList.add("poor");
-  else if (attRating === "very poor") ratingElement.classList.add("very-poor");
+    if (params.att_rating === "Excellent") ratingElement.classList.add("excellent");
+    else if (params.att_rating === "Very good") ratingElement.classList.add("very-good");
+    else if (params.att_rating === "Good") ratingElement.classList.add("good");
+    else if (params.att_rating === "At Risk") ratingElement.classList.add("at-risk");
+    else if (params.att_rating === "Poor") ratingElement.classList.add("poor");
+    else if (params.att_rating === "Very poor") ratingElement.classList.add("very-poor");
   }
-
-  // Colour "T" cells in red in the attendance table
-  const tableCells = document.querySelectorAll('tbody td');
-  tableCells.forEach(cell => {
-    if (cell.textContent.trim() === "T") {
-      cell.classList.add("attendance-T");
-    }
-  });
 
   // Update week beginning
   if (params.date) {
