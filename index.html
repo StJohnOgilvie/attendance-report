@@ -281,45 +281,52 @@
             color: white;
         }
 
-        .attendance-rating {
-            font-weight: bold;
-            padding: 5px;
-            border-radius: 5px;
-            text-align: center;
-        }
-        
-        .excellent {
-            background-color: #d4edda; /* Light green */
-            color: #155724; /* Dark green */
-        }
-        
-        .very-good {
-            background-color: #cce5ff; /* Light blue */
-            color: #004085; /* Dark blue */
-        }
-        
-        .good {
-            background-color: #fff3cd; /* Light yellow */
-            color: #856404; /* Dark yellow */
-        }
-        
-        .at-risk {
-            background-color: #f8d7da; /* Light red */
-            color: #721c24; /* Dark red */
-        }
-        
-        .poor {
-            background-color: #f5c6cb; /* Pale red */
-            color: #721c24; /* Dark red */
-        }
-        
-        .very-poor {
-            background-color: #f0b0b8; /* Stronger red */
-            color: #6e0b18; /* Dark maroon */
-        }
+/* ############################################################################ */
 
 
 
+
+    .attendance-rating {
+        font-weight: bold;
+        padding: 5px;
+        border-radius: 5px;
+        text-align: center;
+    }
+    
+    .excellent {
+        background-color: #d4edda; /* Light green */
+        color: #155724; /* Dark green */
+    }
+    
+    .very-good {
+        background-color: #cce5ff; /* Light blue */
+        color: #004085; /* Dark blue */
+    }
+    
+    .good {
+        background-color: #fff3cd; /* Light yellow */
+        color: #856404; /* Dark yellow */
+    }
+    
+    .at-risk {
+        background-color: #f8d7da; /* Light red */
+        color: #721c24; /* Dark red */
+    }
+    
+    .poor {
+        background-color: #f5c6cb; /* Pale red */
+        color: #721c24; /* Dark red */
+    }
+    
+    .very-poor {
+        background-color: #f0b0b8; /* Strong red */
+        color: #6e0b18; /* Dark maroon */
+    }
+
+
+        
+
+/* ############################################################################ */
 
 
         
@@ -622,35 +629,48 @@
         }
 
 
-
+//########################################################################################################################
         
-    // Update attendance rating with severity highlighting
-    if (params.att_rating) {
-        const ratingElement = document.querySelectorAll('.info-item .body')[3];
-        ratingElement.textContent = params.att_rating || "N/A";
-    
-        // Convert to lowercase for case-insensitive comparison
-        const rating = params.att_rating.toLowerCase();
-    
-        // Apply background colour classes based on rating
-        if (rating === "excellent") {
+// Update attendance rating with severity highlighting
+if (params.att_rating) {
+    const ratingElement = document.querySelectorAll('.info-item .body')[3];
+
+    // Clean up the rating: remove extra spaces and convert to lowercase
+    const cleanedRating = params.att_rating.trim().toLowerCase();
+
+    // Update the content
+    ratingElement.textContent = params.att_rating.trim();
+
+    // Apply background colour classes based on cleaned rating
+    switch (cleanedRating) {
+        case "excellent":
             ratingElement.classList.add("attendance-rating", "excellent");
-        } else if (rating === "very good") {
+            break;
+        case "very good":
             ratingElement.classList.add("attendance-rating", "very-good");
-        } else if (rating === "good") {
+            break;
+        case "good":
             ratingElement.classList.add("attendance-rating", "good");
-        } else if (rating === "at risk") {
+            break;
+        case "at risk":
             ratingElement.classList.add("attendance-rating", "at-risk");
-        } else if (rating === "poor") {
+            break;
+        case "poor":
             ratingElement.classList.add("attendance-rating", "poor");
-        } else if (rating === "very poor") {
+            break;
+        case "very poor":
             ratingElement.classList.add("attendance-rating", "very-poor");
-        }
+            break;
+        default:
+            ratingElement.textContent = "N/A";
+            break;
     }
+}
 
 
 
 
+//########################################################################################################################
 
 
         
