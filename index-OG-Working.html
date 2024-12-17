@@ -293,30 +293,30 @@
         </div>
 
         <div class="info-section">
-            <div class="name">Joe Bloggs</div>
+            <div class="name">Loading Data</div>
             <div class="info-box">
                 <div class="info-item">
                     <div class="header">Stage</div>
-                    <div class="body">S1</div>
+                    <div class="body">...</div>
                 </div>
                 <div class="info-item">
                     <div class="header">Tutor</div>
-                    <div class="body">1A</div>
+                    <div class="body">...</div>
                 </div>
                 <div class="info-item">
                     <div class="header">Attendance</div>
-                    <div class="body">98%</div>
+                    <div class="body">%</div>
                 </div>
                 <div class="info-item">
                     <div class="header">Rating</div>
-                    <div class="body">Excellent</div>
+                    <div class="body">...</div>
                 </div>
             </div>
         </div>
 
         <hr>
         <div class="week-beginning">
-            <h2>Week Beginning: 20th December 2024</h2>
+            <h2>Week Beginning: </h2>
         </div>
 
         <div class="table-wrapper">
@@ -336,53 +336,53 @@
                 <tbody>
                     <tr>
                         <td><strong>Monday</strong></td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>T</td>
-                        <td>-</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td><strong>Tuesday</strong></td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td><strong>Wednesday</strong></td>
-                        <td>T</td>
-                        <td>T</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td><strong>Thursday</strong></td>
-                        <td>T</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td><strong>Friday</strong></td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>
@@ -412,23 +412,23 @@
                     </tr>
                     <tr>
                         <td>~</td>
-                        <td>Other in school activity</td>
+                        <td>Other in School Activity</td>
                     </tr>
                     <tr>
                         <td>T</td>
-                        <td>Absent</td>
+                        <td>Absent (Unexplained)</td>
                     </tr>
                     <tr>
                         <td>D</td>
-                        <td>Explained Absence (Reason provided by Parent/Carer)</td>
+                        <td>Explained Absence (Reason Provided by Parent/Carer)</td>
                     </tr>
                     <tr>
                         <td>U</td>
-                        <td>Truancy</td>
+                        <td>Truancy or Unauthorised Absence</td>
                     </tr>
                     <tr>
                         <td>J</td>
-                        <td>Late to school (Arrived after 8:50am)</td>
+                        <td>Late to School (Arrived After 8:50am)</td>
                     </tr>
                     <tr>
                         <td>P</td>
@@ -534,12 +534,90 @@
         </div>
     </div>
 
-    <script>
-        function toggleLegend() {
-            const legend = document.getElementById('legendTable');
-            legend.style.display = legend.style.display === 'none' ? 'block' : 'none';
+<script>
+    // Function to parse query parameters from the URL
+    function getQueryParams() {
+        const params = {};
+        const queryString = window.location.search.substring(1);
+        const pairs = queryString.split("&");
+
+        pairs.forEach(pair => {
+            const [key, value] = pair.split("=");
+            params[decodeURIComponent(key)] = decodeURIComponent(value || "");
+        });
+
+        return params;
+    }
+
+    // Function to convert Excel date to JavaScript date
+    function convertExcelDateToJSDate(excelDate) {
+        // Excel epoch starts at 1900-01-01, JavaScript epoch starts at 1970-01-01
+        const excelEpochOffset = new Date(1899, 11, 30).getTime(); // Excel's epoch is December 30, 1899
+        const millisecondsPerDay = 86400000;
+        return new Date(excelEpochOffset + excelDate * millisecondsPerDay);
+    }
+
+    // Function to update the HTML dynamically
+    function populateReport() {
+        const params = getQueryParams();
+
+        // Update name
+        if (params.forename && params.surname) {
+            const nameElement = document.querySelector('.name');
+            nameElement.textContent = `${params.forename} ${params.surname}`;
         }
-    </script>
+
+        // Update stage and tutor group
+        if (params.stage && params['tutor']) {
+            document.querySelectorAll('.info-item .body')[0].textContent = params.stage;
+            document.querySelectorAll('.info-item .body')[1].textContent = params['tutor'];
+        }
+
+        // Update attendance
+        if (params.att) {
+            document.querySelectorAll('.info-item .body')[2].textContent = `${params.att}%`;
+        }
+
+        // Update attendance rating
+        if (params.att_rating) {
+            document.querySelectorAll('.info-item .body')[3].textContent = params.att_rating || "N/A";
+        }
+
+        // Update timetable table
+        const days = ["mon", "tue", "wed", "thu", "fri"];
+        days.forEach((day, dayIndex) => {
+            for (let i = 1; i <= 7; i++) {
+                const cellValue = params[`${day}${i}`];
+                if (cellValue !== undefined) {
+                    const cell = document.querySelector(`tbody tr:nth-child(${dayIndex + 1}) td:nth-child(${i + 1})`);
+                    cell.textContent = cellValue || "";
+                }
+            }
+        });
+
+        // Update week beginning
+        if (params.date) {
+            const dateElement = document.querySelector('.week-beginning h2');
+            const date = convertExcelDateToJSDate(Number(params.date));
+            dateElement.textContent = `Week Beginning: ${date.toLocaleDateString("en-GB", {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            })}`;
+        }
+    }
+
+    // Function to toggle the visibility of the legend
+    function toggleLegend() {
+        const legend = document.getElementById('legendTable');
+        legend.style.display = legend.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // Run the populateReport function on page load
+    window.onload = populateReport;
+</script>
+
 </body>
 
 </html>
