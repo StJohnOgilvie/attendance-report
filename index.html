@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEST RATING St John Ogilvie Attendance Report</title>
+    <title>TEST RATING1 St John Ogilvie Attendance Report</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -621,26 +621,39 @@
             document.querySelectorAll('.info-item .body')[2].textContent = `${params.att}%`;
         }
 
-        // Update attendance rating with severity highlighting
-        if (params.att_rating) {
-            const ratingElement = document.querySelectorAll('.info-item .body')[3];
-            ratingElement.textContent = params.att_rating || "N/A";
+
+
         
-            // Apply background colour classes based on rating
-            if (params.att_rating.toLowerCase() === "excellent") {
-                ratingElement.classList.add("attendance-rating", "excellent");
-            } else if (params.att_rating.toLowerCase() === "very good") {
-                ratingElement.classList.add("attendance-rating", "very-good");
-            } else if (params.att_rating.toLowerCase() === "good") {
-                ratingElement.classList.add("attendance-rating", "good");
-            } else if (params.att_rating.toLowerCase() === "at risk") {
-                ratingElement.classList.add("attendance-rating", "at-risk");
-            } else if (params.att_rating.toLowerCase() === "poor") {
-                ratingElement.classList.add("attendance-rating", "poor");
-            } else if (params.att_rating.toLowerCase() === "very poor") {
-                ratingElement.classList.add("attendance-rating", "very-poor");
-            }
+    // Update attendance rating with severity highlighting
+    if (params.att_rating) {
+        const ratingElement = document.querySelectorAll('.info-item .body')[3];
+        ratingElement.textContent = params.att_rating || "N/A";
+    
+        // Convert to lowercase for case-insensitive comparison
+        const rating = params.att_rating.toLowerCase();
+    
+        // Apply background colour classes based on rating
+        if (rating === "excellent") {
+            ratingElement.classList.add("attendance-rating", "excellent");
+        } else if (rating === "very good") {
+            ratingElement.classList.add("attendance-rating", "very-good");
+        } else if (rating === "good") {
+            ratingElement.classList.add("attendance-rating", "good");
+        } else if (rating === "at risk") {
+            ratingElement.classList.add("attendance-rating", "at-risk");
+        } else if (rating === "poor") {
+            ratingElement.classList.add("attendance-rating", "poor");
+        } else if (rating === "very poor") {
+            ratingElement.classList.add("attendance-rating", "very-poor");
         }
+    }
+
+
+
+
+
+
+        
 
 
         // Update timetable table
