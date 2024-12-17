@@ -288,47 +288,52 @@
 
 .attendance-rating {
     font-weight: bold;
-    padding: 5px 10px; /* Padding to create the pill shape */
-    border-radius: 20px; /* Makes the background a rounded pill shape */
-    display: inline-block; /* Ensures the background wraps tightly around the text */
-    text-align: center;
+    position: relative; /* Allows positioning for the pseudo-element */
+    display: inline-block; /* Wraps tightly around the text */
+    color: #333; /* Default text colour */
+    background-color: #ffffff; /* White background */
+    padding: 5px 10px; /* Padding for spacing */
+    border-radius: 20px; /* White rounded background */
+    z-index: 1; /* Ensures text is above the pill shape */
 }
 
-/* Excellent: Bright Green */
-.excellent {
+/* Add the coloured pill behind the text */
+.attendance-rating::before {
+    content: ""; /* Adds the pseudo-element */
+    position: absolute;
+    top: 2px; /* Tight positioning */
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    border-radius: 20px; /* Creates the pill shape */
+    z-index: -1; /* Positions the colour behind the text */
+}
+
+/* Colour definitions for each rating */
+.excellent::before {
     background-color: #28a745; /* Bright green */
-    color: #ffffff; /* White text */
 }
 
-/* Very Good: Light Green */
-.very-good {
+.very-good::before {
     background-color: #8fd19e; /* Light green */
-    color: #ffffff; /* White text */
 }
 
-/* Good: Yellow */
-.good {
+.good::before {
     background-color: #ffc107; /* Yellow */
-    color: #212529; /* Dark text for contrast */
 }
 
-/* At Risk: Orange */
-.at-risk {
+.at-risk::before {
     background-color: #fd7e14; /* Orange */
-    color: #ffffff; /* White text */
 }
 
-/* Poor: Light Red */
-.poor {
+.poor::before {
     background-color: #f5c6cb; /* Light red */
-    color: #721c24; /* Dark red text */
 }
 
-/* Very Poor: Dark Red */
-.very-poor {
+.very-poor::before {
     background-color: #dc3545; /* Dark red */
-    color: #ffffff; /* White text */
 }
+
 
 
 
