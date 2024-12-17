@@ -288,34 +288,33 @@
 
 .attendance-rating {
     font-weight: bold;
-    position: relative; /* Allows positioning for the pseudo-element */
-    display: inline-block; /* Wraps tightly around the text */
+    position: relative; /* Enables positioning for the pseudo-element */
+    display: inline-block; /* Ensures text wraps tightly */
+    padding: 5px 15px; /* Space around the text */
+    border-radius: 20px; /* Creates the pill shape */
     color: #333; /* Default text colour */
-    background-color: #ffffff; /* White background */
-    padding: 5px 10px; /* Padding for spacing */
-    border-radius: 20px; /* White rounded background */
-    z-index: 1; /* Ensures text is above the pill shape */
+    background-color: #ffffff; /* Default white background */
+    z-index: 1; /* Ensures text remains on top */
 }
 
-/* Add the coloured pill behind the text */
 .attendance-rating::before {
-    content: ""; /* Adds the pseudo-element */
+    content: "";
     position: absolute;
-    top: 2px; /* Tight positioning */
+    top: 2px; 
     left: 2px;
     right: 2px;
     bottom: 2px;
-    border-radius: 20px; /* Creates the pill shape */
-    z-index: -1; /* Positions the colour behind the text */
+    border-radius: 20px; /* Keeps the background pill-shaped */
+    z-index: -1; /* Positions the coloured pill behind the text */
 }
 
-/* Colour definitions for each rating */
+/* Colour scale for each rating */
 .excellent::before {
-    background-color: #28a745; /* Bright green */
+    background-color: #28a745; /* Bright Green */
 }
 
 .very-good::before {
-    background-color: #8fd19e; /* Light green */
+    background-color: #8fd19e; /* Light Green */
 }
 
 .good::before {
@@ -327,12 +326,13 @@
 }
 
 .poor::before {
-    background-color: #f5c6cb; /* Light red */
+    background-color: #f5c6cb; /* Light Red */
 }
 
 .very-poor::before {
-    background-color: #dc3545; /* Dark red */
+    background-color: #dc3545; /* Dark Red */
 }
+
 
 
 
