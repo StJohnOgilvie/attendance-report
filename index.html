@@ -302,35 +302,36 @@
         text-align: center;
     }
     
-    .excellent {
-        background-color: #d4edda !important; /* Light green */
-        color: #155724 !important; /* Dark green */
-    }
-    
-    .very-good {
-        background-color: #cce5ff !important; /* Light blue */
-        color: #004085 !important; /* Dark blue */
-    }
-    
-    .good {
-        background-color: #fff3cd !important; /* Light yellow */
-        color: #856404 !important; /* Dark yellow */
-    }
-    
-    .at-risk {
-        background-color: #f8d7da !important; /* Light red */
-        color: #721c24 !important; /* Dark red */
-    }
-    
-    .poor {
-        background-color: #f5c6cb !important; /* Pale red */
-        color: #721c24 !important; /* Dark red */
-    }
-    
-    .very-poor {
-        background-color: #f0b0b8 !important; /* Strong red */
-        color: #6e0b18 !important; /* Dark maroon */
-    }
+.excellent {
+    background-color: #28a745 !important; /* Bright Green */
+    color: #ffffff !important; /* White text */
+}
+
+.very-good {
+    background-color: #7bc043 !important; /* Soft Green */
+    color: #ffffff !important; /* White text */
+}
+
+.good {
+    background-color: #ffc107 !important; /* Yellow */
+    color: #333333 !important; /* Darker text for contrast */
+}
+
+.at-risk {
+    background-color: #ff8c00 !important; /* Orange */
+    color: #ffffff !important; /* White text */
+}
+
+.poor {
+    background-color: #ff4c4c !important; /* Bright Red */
+    color: #ffffff !important; /* White text */
+}
+
+.very-poor {
+    background-color: #b22222 !important; /* Dark Red */
+    color: #ffffff !important; /* White text */
+}
+
 
 
 
@@ -561,32 +562,33 @@
                     <th>Rating</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>100%</td>
-                    <td>Excellent</td>
-                </tr>
-                <tr>
-                    <td>>95%</td>
-                    <td>Very Good</td>
-                </tr>
-                <tr>
-                    <td>>90%</td>
-                    <td>Good</td>
-                </tr>
-                <tr>
-                    <td>80-89%</td>
-                    <td>At Risk</td>
-                </tr>
-                <tr>
-                    <td>60-79%</td>
-                    <td>Poor</td>
-                </tr>
-                <tr>
-                    <td>&lt;60%</td>
-                    <td>Very Poor</td>
-                </tr>
-            </tbody>
+<tbody>
+    <tr>
+        <td>100%</td>
+        <td><span class="attendance-rating excellent">Excellent</span></td>
+    </tr>
+    <tr>
+        <td>>95%</td>
+        <td><span class="attendance-rating very-good">Very Good</span></td>
+    </tr>
+    <tr>
+        <td>>90%</td>
+        <td><span class="attendance-rating good">Good</span></td>
+    </tr>
+    <tr>
+        <td>80-89%</td>
+        <td><span class="attendance-rating at-risk">At Risk</span></td>
+    </tr>
+    <tr>
+        <td>60-79%</td>
+        <td><span class="attendance-rating poor">Poor</span></td>
+    </tr>
+    <tr>
+        <td>&lt;60%</td>
+        <td><span class="attendance-rating very-poor">Very Poor</span></td>
+    </tr>
+</tbody>
+
         </table>
     </div>
 </div>
