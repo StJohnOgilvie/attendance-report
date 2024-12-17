@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEST RATING7 St John Ogilvie Attendance Report</title>
+    <title>TEST RATING8 St John Ogilvie Attendance Report</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -125,6 +125,7 @@
             border-top: none;
             border-bottom-left-radius: 8px;
             border-bottom-right-radius: 8px;
+            position: relative; /* Allows positioning of child elements */
         }
 
         hr {
@@ -288,50 +289,39 @@
 
 .attendance-rating {
     font-weight: bold;
-    position: relative; /* Enables positioning for the pseudo-element */
-    display: inline-block; /* Ensures text wraps tightly */
-    padding: 5px 15px; /* Space around the text */
-    border-radius: 20px; /* Creates the pill shape */
-    color: #333; /* Default text colour */
-    background-color: #ffffff; /* Default white background */
-    z-index: 1; /* Ensures text remains on top */
+    position: relative;
+    display: inline-block; /* Makes the pill wrap tightly around the text */
+    padding: 5px 15px;
+    border-radius: 20px; /* Makes the pill shape */
+    color: #ffffff; /* White text for contrast */
+    z-index: 1;
 }
 
-.attendance-rating::before {
-    content: "";
-    position: absolute;
-    top: 2px; 
-    left: 2px;
-    right: 2px;
-    bottom: 2px;
-    border-radius: 20px; /* Keeps the background pill-shaped */
-    z-index: -1; /* Positions the coloured pill behind the text */
-}
-
-/* Colour scale for each rating */
-.excellent::before {
+/* Background colour for the pill */
+.excellent {
     background-color: #28a745; /* Bright Green */
 }
 
-.very-good::before {
+.very-good {
     background-color: #8fd19e; /* Light Green */
 }
 
-.good::before {
+.good {
     background-color: #ffc107; /* Yellow */
 }
 
-.at-risk::before {
+.at-risk {
     background-color: #fd7e14; /* Orange */
 }
 
-.poor::before {
+.poor {
     background-color: #f5c6cb; /* Light Red */
 }
 
-.very-poor::before {
+.very-poor {
     background-color: #dc3545; /* Dark Red */
 }
+
 
 
 
