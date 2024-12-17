@@ -117,15 +117,41 @@
             border-top-right-radius: 8px;
         }
 
-        .info-box .info-item .body {
-            background: white;
-            color: #333;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-top: none;
-            border-bottom-left-radius: 8px;
-            border-bottom-right-radius: 8px;
-        }
+.info-box .info-item .body {
+    color: #ffffff; /* White text for better contrast */
+    padding: 10px;
+    border: none; /* Remove border */
+    border-radius: 8px; /* Keep rounded corners */
+    text-align: center;
+    box-sizing: border-box; /* Ensure padding doesn't affect dimensions */
+}
+
+/* Background colours for ratings */
+.info-box .info-item .body.excellent {
+    background-color: #28a745; /* Bright Green */
+}
+
+.info-box .info-item .body.very-good {
+    background-color: #7bc043; /* Soft Green */
+}
+
+.info-box .info-item .body.good {
+    background-color: #ffc107; /* Yellow */
+    color: #333333; /* Dark text for contrast */
+}
+
+.info-box .info-item .body.at-risk {
+    background-color: #ff8c00; /* Orange */
+}
+
+.info-box .info-item .body.poor {
+    background-color: #ff4c4c; /* Bright Red */
+}
+
+.info-box .info-item .body.very-poor {
+    background-color: #b22222; /* Dark Red */
+}
+
 
         hr {
             border: 0;
@@ -643,37 +669,39 @@ function populateReport() {
     }
 
     // Update attendance rating with severity highlighting
-    if (params.att_rating) {
-        const ratingElement = document.querySelectorAll('.info-item .body')[3];
-        const cleanedRating = (params.att_rating || "").trim().toLowerCase();
+if (params.att_rating) {
+    const ratingElement = document.querySelectorAll('.info-box .info-item .body')[3]; // Target the fourth body for "Rating"
+    const cleanedRating = (params.att_rating || "").trim().toLowerCase();
 
-        ratingElement.textContent = params.att_rating.trim();
+    // Clean up previous classes
+    ratingElement.className = "body";
 
-        // Apply background colour classes based on cleaned rating
-        switch (cleanedRating) {
-            case "excellent":
-                ratingElement.classList.add("attendance-rating", "excellent");
-                break;
-            case "very good":
-                ratingElement.classList.add("attendance-rating", "very-good");
-                break;
-            case "good":
-                ratingElement.classList.add("attendance-rating", "good");
-                break;
-            case "at risk":
-                ratingElement.classList.add("attendance-rating", "at-risk");
-                break;
-            case "poor":
-                ratingElement.classList.add("attendance-rating", "poor");
-                break;
-            case "very poor":
-                ratingElement.classList.add("attendance-rating", "very-poor");
-                break;
-            default:
-                ratingElement.textContent = "N/A";
-                break;
-        }
+    // Apply the new background class based on the rating
+    switch (cleanedRating) {
+        case "excellent":
+            ratingElement.classList.add("excellent");
+            break;
+        case "very good":
+            ratingElement.classList.add("very-good");
+            break;
+        case "good":
+            ratingElement.classList.add("good");
+            break;
+        case "at risk":
+            ratingElement.classList.add("at-risk");
+            break;
+        case "poor":
+            ratingElement.classList.add("poor");
+            break;
+        case "very poor":
+            ratingElement.classList.add("very-poor");
+            break;
+        default:
+            ratingElement.textContent = "N/A";
+            break;
     }
+}
+
 
     // Update timetable table
     const days = ["mon", "tue", "wed", "thu", "fri"];
