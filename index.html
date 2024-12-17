@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEST RATING4 St John Ogilvie Attendance Report</title>
+    <title>TEST RATING5 St John Ogilvie Attendance Report</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -286,48 +286,79 @@
 
 
 
-    .attendance-rating {
-        font-weight: bold;
-        padding: 5px;
-        border-radius: 5px;
-        text-align: center;
-    }
-    
-    /* Excellent: Bright Green */
-    .excellent {
-        background-color: #28a745 !important; /* Bright green */
-        color: #ffffff !important; /* White text */
-    }
-    
-    /* Very Good: Light Green */
-    .very-good {
-        background-color: #8fd19e !important; /* Light green */
-        color: #155724 !important; /* Dark green text */
-    }
-    
-    /* Good: Yellow */
-    .good {
-        background-color: #ffc107 !important; /* Yellow */
-        color: #856404 !important; /* Dark yellow text */
-    }
-    
-    /* At Risk: Orange */
-    .at-risk {
-        background-color: #fd7e14 !important; /* Orange */
-        color: #ffffff !important; /* White text */
-    }
-    
-    /* Poor: Light Red */
-    .poor {
-        background-color: #f5c6cb !important; /* Light red */
-        color: #721c24 !important; /* Dark red text */
-    }
-    
-    /* Very Poor: Dark Red */
-    .very-poor {
-        background-color: #dc3545 !important; /* Dark red */
-        color: #ffffff !important; /* White text */
-    }
+.attendance-rating {
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* Excellent: Bright Green with Halo */
+.excellent {
+    color: #28a745; /* Bright green */
+    -webkit-text-stroke: 1px #145c2b; /* Dark green halo */
+    text-shadow: 
+        -1px -1px 0px #145c2b,
+        1px -1px 0px #145c2b,
+        -1px 1px 0px #145c2b,
+        1px 1px 0px #145c2b;
+}
+
+/* Very Good: Light Green with Halo */
+.very-good {
+    color: #8fd19e; /* Light green */
+    -webkit-text-stroke: 1px #5a8f64; /* Darker green halo */
+    text-shadow: 
+        -1px -1px 0px #5a8f64,
+        1px -1px 0px #5a8f64,
+        -1px 1px 0px #5a8f64,
+        1px 1px 0px #5a8f64;
+}
+
+/* Good: Yellow with Halo */
+.good {
+    color: #ffc107; /* Yellow */
+    -webkit-text-stroke: 1px #b28904; /* Dark yellow halo */
+    text-shadow: 
+        -1px -1px 0px #b28904,
+        1px -1px 0px #b28904,
+        -1px 1px 0px #b28904,
+        1px 1px 0px #b28904;
+}
+
+/* At Risk: Orange with Halo */
+.at-risk {
+    color: #fd7e14; /* Orange */
+    -webkit-text-stroke: 1px #b2590d; /* Darker orange halo */
+    text-shadow: 
+        -1px -1px 0px #b2590d,
+        1px -1px 0px #b2590d,
+        -1px 1px 0px #b2590d,
+        1px 1px 0px #b2590d;
+}
+
+/* Poor: Light Red with Halo */
+.poor {
+    color: #f5c6cb; /* Light red */
+    -webkit-text-stroke: 1px #c18287; /* Darker red halo */
+    text-shadow: 
+        -1px -1px 0px #c18287,
+        1px -1px 0px #c18287,
+        -1px 1px 0px #c18287,
+        1px 1px 0px #c18287;
+}
+
+/* Very Poor: Dark Red with Halo */
+.very-poor {
+    color: #dc3545; /* Dark red */
+    -webkit-text-stroke: 1px #8b222c; /* Dark maroon halo */
+    text-shadow: 
+        -1px -1px 0px #8b222c,
+        1px -1px 0px #8b222c,
+        -1px 1px 0px #8b222c,
+        1px 1px 0px #8b222c;
+}
+
 
 
 
