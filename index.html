@@ -629,12 +629,14 @@ function populateReport() {
     ratingElement.classList.remove("excellent", "very-good", "good", "at-risk", "poor", "very-poor");
 
     // Add new class based on attendance rating
-    if (params.att_rating === "Excellent") ratingElement.classList.add("excellent");
-    else if (params.att_rating === "Very good") ratingElement.classList.add("very-good");
-    else if (params.att_rating === "Good") ratingElement.classList.add("good");
-    else if (params.att_rating === "At Risk") ratingElement.classList.add("at-risk");
-    else if (params.att_rating === "Poor") ratingElement.classList.add("poor");
-    else if (params.att_rating === "Very poor") ratingElement.classList.add("very-poor");
+  const attRating = params.att_rating?.trim().toLowerCase(); // Ensure lowercase & trim whitespace
+  
+  if (attRating === "excellent") ratingElement.classList.add("excellent");
+  else if (attRating === "very good") ratingElement.classList.add("very-good");
+  else if (attRating === "good") ratingElement.classList.add("good");
+  else if (attRating === "at risk") ratingElement.classList.add("at-risk");
+  else if (attRating === "poor") ratingElement.classList.add("poor");
+  else if (attRating === "very poor") ratingElement.classList.add("very-poor");
   }
 
   // Colour "T" cells in red in the attendance table
