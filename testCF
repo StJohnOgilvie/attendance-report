@@ -1,0 +1,109 @@
+// Function to parse query parameters from the URL
+function getQueryParams() {
+    const params = {};
+    const queryString = window.location.search.substring(1);
+    const pairs = queryString.split("&");
+
+    pairs.forEach(pair => {
+        const [key, value] = pair.split("=");
+        params[decodeURIComponent(key)] = decodeURIComponent(value || "");
+    });
+
+    return params;
+}
+
+// Function to convert Excel date to JavaScript date
+function convertExcelDateToJSDate(excelDate) {
+    const excelEpochOffset = new Date(1899, 11, 30).getTime();
+    const millisecondsPerDay = 86400000;
+    return new Date(excelEpochOffset + excelDate * millisecondsPerDay);
+}
+
+// Function to update the HTML dynamically
+function populateReport() {
+    const params = getQueryParams();
+
+    // Update name
+    if (params.forename && params.surname) {
+        const nameElement = document.querySelector('.name');
+        nameElement.textContent = `${params.forename} ${params.surname}`;
+    }
+
+    // Update stage and tutor group
+    if (params.stage && params['tutor']) {
+        document.querySelectorAll('.info-item .body')[0].textContent = params.stage;
+        document.querySelectorAll('.info-item .body')[1].textContent = params['tutor'];
+    }
+
+    // Update attendance
+    if (params.att) {
+        const attendance = parseFloat(params.att);
+        document.querySelectorAll('.info-item .body')[2].textContent = !isNaN(attendance) ? `${attendance}%` : "N/A";
+    }
+
+    // Update attendance rating with severity highlighting
+    if (params.att_rating) {
+        const ratingElement = document.querySelectorAll('.info-item .body')[3];
+        const cleanedRating = (params.att_rating || "").trim().toLowerCase();
+
+        ratingElement.textContent = params.att_rating.trim();
+
+        // Apply background colour classes based on cleaned rating
+        switch (cleanedRating) {
+            case "excellent":
+                ratingElement.classList.add("attendance-rating", "excellent");
+                break;
+            case "very good":
+                ratingElement.classList.add("attendance-rating", "very-good");
+                break;
+            case "good":
+                ratingElement.classList.add("attendance-rating", "good");
+                break;
+            case "at risk":
+                ratingElement.classList.add("attendance-rating", "at-risk");
+                break;
+            case "poor":
+                ratingElement.classList.add("attendance-rating", "poor");
+                break;
+            case "very poor":
+                ratingElement.classList.add("attendance-rating", "very-poor");
+                break;
+            default:
+                ratingElement.textContent = "N/A";
+                break;
+        }
+    }
+
+    // Update timetable table
+    const days = ["mon", "tue", "wed", "thu", "fri"];
+    days.forEach((day, dayIndex) => {
+        for (let i = 1; i <= 7; i++) {
+            const cellValue = params[`${day}${i}`];
+            if (cellValue !== undefined) {
+                const cell = document.querySelector(`tbody tr:nth-child(${dayIndex + 1}) td:nth-child(${i + 1})`);
+                cell.textContent = cellValue || "";
+            }
+        }
+    });
+
+    // Update week beginning
+    if (params.date) {
+        const dateElement = document.querySelector('.week-beginning h2');
+        const date = convertExcelDateToJSDate(Number(params.date));
+        dateElement.textContent = `Week Beginning: ${date.toLocaleDateString("en-GB", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+        })}`;
+    }
+}
+
+// Function to toggle the visibility of the legend
+function toggleLegend() {
+    const legend = document.getElementById('legendTable');
+    legend.style.display = legend.style.display === 'none' ? 'block' : 'none';
+}
+
+// Run the populateReport function on page load
+window.onload = populateReport;
