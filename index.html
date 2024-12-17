@@ -1,623 +1,654 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>St John Ogilvie Attendance Report</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+        color: #333;
+      }
 
-        .container {
-            max-width: 800px;
-            width: 95%;
-            margin: 20px auto;
-            background: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            padding: 10px;
-        }
+      .container {
+        max-width: 800px;
+        width: 95%;
+        margin: 20px auto;
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        padding: 10px;
+      }
 
-        .header {
-            background: #228B22;
-            color: white;
-            text-align: center;
-            padding: 25px;
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-        }
+      .header {
+        background: #228B22;
+        color: white;
+        text-align: center;
+        padding: 25px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+      }
 
-        .header img {
-            width: 0px;
-            height: 0px;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            border-radius: 50%;
-        }
+      .header img {
+        width: 0px;
+        height: 0px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        border-radius: 50%;
+      }
 
-        .header-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://eeeeeediot.github.io/attendance-report/SJOBadge.png');
-            background-size: 90px;
-            background-repeat: no-repeat;
-            background-position: right center;
-            opacity: 0.5;
-            pointer-events: none;
-            z-index: 0;
-        }
+      .header-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('https://eeeeeediot.github.io/attendance-report/SJOBadge.png');
+        background-size: 90px;
+        background-repeat: no-repeat;
+        background-position: right center;
+        opacity: 0.5;
+        pointer-events: none;
+        z-index: 0;
+      }
 
-        .header h1,
-        .header p {
-            position: relative;
-            z-index: 1;
-            margin: 0;
-        }
+      .header h1,
+      .header p {
+        position: relative;
+        z-index: 1;
+        margin: 0;
+      }
 
-        .info-section {
-            background: #f4f4f4;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
+      .info-section {
+        background: #f4f4f4;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
 
-        .name {
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
+      .name {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
 
+      .info-box {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: nowrap;
+        gap: 15px;
+      }
+
+      .info-box .info-item {
+        flex: 1 1 calc(15%);
+        max-width: calc(15%);
+        min-width: 100px;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+      }
+
+      @media (max-width: 600px) {
         .info-box {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: nowrap;
-            gap: 15px;
+          flex-wrap: wrap;
         }
 
         .info-box .info-item {
-            flex: 1 1 calc(15%);
-            max-width: calc(15%);
-            min-width: 100px;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+          flex: 1 1 calc(45% - 15px);
+          max-width: calc(45% - 15px);
         }
+      }
 
-        @media (max-width: 600px) {
-            .info-box {
-                flex-wrap: wrap;
-            }
+      .info-box .info-item .header {
+        background: #228B22;
+        color: white;
+        font-weight: bold;
+        padding: 10px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+      }
 
-            .info-box .info-item {
-                flex: 1 1 calc(45% - 15px);
-                max-width: calc(45% - 15px);
-            }
-        }
+      .info-box .info-item .body {
+        background: white;
+        color: #333;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-top: none;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
 
-        .info-box .info-item .header {
-            background: #228B22;
-            color: white;
-            font-weight: bold;
-            padding: 10px;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-        }
+      hr {
+        border: 0;
+        border-top: 1px solid #ddd;
+        margin: 20px 0;
+      }
 
-        .info-box .info-item .body {
-            background: white;
-            color: #333;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-top: none;
-            border-bottom-left-radius: 8px;
-            border-bottom-right-radius: 8px;
-        }
+      .week-beginning {
+        text-align: center;
+        font-size: 12px;
+        font-weight: bold;
+        color: #228B22;
+        margin: 0px 0;
+        background: #f4f4f4;
+        padding: 0px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
 
-        hr {
-            border: 0;
-            border-top: 1px solid #ddd;
-            margin: 20px 0;
-        }
+      .table-wrapper {
+        overflow-x: auto;
+      }
 
-        .week-beginning {
-            text-align: center;
-            font-size: 12px;
-            font-weight: bold;
-            color: #228B22;
-            margin: 0px 0;
-            background: #f4f4f4;
-            padding: 0px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0px auto;
+      }
 
-        .table-wrapper {
-            overflow-x: auto;
-        }
+      th,
+      td {
+        border: 1px solid #ddd;
+        text-align: center;
+        padding: 8px;
+        font-size: 14px;
+      }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 0px auto;
-        }
+      th {
+        background: #228B22;
+        color: white;
+      }
 
-        th,
-        td {
-            border: 1px solid #ddd;
-            text-align: center;
-            padding: 8px;
-            font-size: 14px;
-        }
+      .legend {
+        margin-top: 10px;
+      }
 
-        th {
-            background: #228B22;
-            color: white;
-        }
+      .legend table {
+        width: 100%;
+        margin: 20px auto;
+      }
 
-        .legend {
-            margin-top: 10px;
-        }
+      .legend th {
+        background: #228B22;
+        color: white;
+      }
 
-        .legend table {
-            width: 100%;
-            margin: 20px auto;
-        }
+      .legend td {
+        text-align: left;
+      }
 
-        .legend th {
-            background: #228B22;
-            color: white;
-        }
+      .legend td:first-child {
+        text-align: center;
+        width: 50px;
+      }
 
-        .legend td {
-            text-align: left;
-        }
+      .button-container {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
 
-        .legend td:first-child {
-            text-align: center;
-            width: 50px;
-        }
+      a.button {
+        display: inline-block;
+        padding: 10px 20px;
+        background: #000000;
+        color: #FFD700;
+        text-decoration: none;
+        text-align: center;
+        border-radius: 5px;
+      }
 
-        .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
+      a.button:hover {
+        background: #333333;
+      }
 
-        a.button {
-            display: inline-block;
-            padding: 10px 20px;
-            background: #000000;
-            color: #FFD700;
-            text-decoration: none;
-            text-align: center;
-            border-radius: 5px;
-        }
+      .toggle-button button {
+        background: #228B22;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
 
-        a.button:hover {
-            background: #333333;
-        }
+      .toggle-button button:hover {
+        background: #1a6b18;
+      }
 
-        .toggle-button button {
-            background: #228B22;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+      .alert-section {
+        background: #ffe5e5;
+        color: #b22222;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
 
-        .toggle-button button:hover {
-            background: #1a6b18;
-        }
+      .alert-section h3 {
+        margin-bottom: 15px;
+      }
 
-        .alert-section {
-            background: #ffe5e5;
-            color: #b22222;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
+      .alert-section .key-points {
+        text-align: left;
+        margin-top: 15px;
+        padding: 10px;
+        border: 1px solid #b22222;
+        border-radius: 8px;
+        background: #fff6f6;
+      }
 
-        .alert-section h3 {
-            margin-bottom: 15px;
-        }
+      .alert-section .key-points ul {
+        margin: 0;
+        padding-left: 20px;
+      }
 
-        .alert-section .key-points {
-            text-align: left;
-            margin-top: 15px;
-            padding: 10px;
-            border: 1px solid #b22222;
-            border-radius: 8px;
-            background: #fff6f6;
-        }
+      .alert-section .key-points ul li {
+        margin-bottom: 10px;
+      }
 
-        .alert-section .key-points ul {
-            margin: 0;
-            padding-left: 20px;
-        }
+      .alert-section .missed-learning {
+        margin-top: 20px;
+      }
 
-        .alert-section .key-points ul li {
-            margin-bottom: 10px;
-        }
+      .alert-section table {
+        width: 100%;
+        margin-top: 10px;
+        border-collapse: collapse;
+      }
 
-        .alert-section .missed-learning {
-            margin-top: 20px;
-        }
+      .alert-section table,
+      .alert-section th,
+      .alert-section td {
+        border: 1px solid #b22222;
+        text-align: center;
+        padding: 8px;
+      }
 
-        .alert-section table {
-            width: 100%;
-            margin-top: 10px;
-            border-collapse: collapse;
-        }
+      .alert-section th {
+        background: #228b22;
+        color: white;
+      }
 
-        .alert-section table,
-        .alert-section th,
-        .alert-section td {
-            border: 1px solid #b22222;
-            text-align: center;
-            padding: 8px;
-        }
+      .excellent {
+        color: green;
+        font-weight: bold;
+      }
 
-        .alert-section th {
-            background: #228b22;
-            color: white;
-        }
+      .very-good {
+        color: #228B22;
+        font-weight: bold;
+      }
+
+      .good {
+        color: #DAA520;
+        font-weight: bold;
+      }
+
+      .at-risk {
+        color: orange;
+        font-weight: bold;
+      }
+
+      .poor {
+        color: red;
+        font-weight: bold;
+      }
+
+      .very-poor {
+        color: darkred;
+        font-weight: bold;
+      }
+
+      .attendance-T {
+        background-color: #FF6347;
+        /* Red background */
+        color: white;
+        /* White text for contrast */
+        font-weight: bold;
+        border-radius: 4px;
+        padding: 2px;
+        text-align: center;
+      }
     </style>
-</head>
-
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="header">
-            <div class="header-background"></div>
-            <h1>Attendance Report</h1>
-            <p>St John Ogilvie High School</p>
-            <img src="https://eeeeeediot.github.io/attendance-report/SJOBadge.png">
+      <div class="header">
+        <div class="header-background"></div>
+        <h1>Attendance Report</h1>
+        <p>St John Ogilvie High School</p>
+        <img src="https://eeeeeediot.github.io/attendance-report/SJOBadge.png">
+      </div>
+      <div class="info-section">
+        <div class="name">Loading Data</div>
+        <div class="info-box">
+          <div class="info-item">
+            <div class="header">Stage</div>
+            <div class="body">...</div>
+          </div>
+          <div class="info-item">
+            <div class="header">Tutor</div>
+            <div class="body">...</div>
+          </div>
+          <div class="info-item">
+            <div class="header">Attendance</div>
+            <div class="body">%</div>
+          </div>
+          <div class="info-item">
+            <div class="header">Rating</div>
+            <div class="body">...</div>
+          </div>
         </div>
-
-        <div class="info-section">
-            <div class="name">Loading Data</div>
-            <div class="info-box">
-                <div class="info-item">
-                    <div class="header">Stage</div>
-                    <div class="body">...</div>
-                </div>
-                <div class="info-item">
-                    <div class="header">Tutor</div>
-                    <div class="body">...</div>
-                </div>
-                <div class="info-item">
-                    <div class="header">Attendance</div>
-                    <div class="body">%</div>
-                </div>
-                <div class="info-item">
-                    <div class="header">Rating</div>
-                    <div class="body">...</div>
-                </div>
-            </div>
+      </div>
+      <hr>
+      <div class="week-beginning">
+        <h2>Week Beginning: </h2>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>1</th>
+              <th>2</th>
+              <th>3</th>
+              <th>4</th>
+              <th>5</th>
+              <th>6</th>
+              <th>7</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>Monday</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Tuesday</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Wednesday</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Thursday</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Friday</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <hr>
+      <div class="button-container">
+        <a href="https://forms.office.com/e/YsFRTmdw3v" class="button">Submit Absence Reason</a>
+        <div class="toggle-button">
+          <button onclick="toggleLegend()">View Legend</button>
         </div>
-
-        <hr>
-        <div class="week-beginning">
-            <h2>Week Beginning: </h2>
+      </div>
+      <hr>
+      <div class="legend" id="legendTable" style="display: none;">
+        <table>
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>-</td>
+              <td>Present</td>
+            </tr>
+            <tr>
+              <td>~</td>
+              <td>Other in School Activity</td>
+            </tr>
+            <tr>
+              <td>T</td>
+              <td>Absent (Unexplained)</td>
+            </tr>
+            <tr>
+              <td>D</td>
+              <td>Explained Absence (Reason Provided by Parent/Carer)</td>
+            </tr>
+            <tr>
+              <td>U</td>
+              <td>Truancy or Unauthorised Absence</td>
+            </tr>
+            <tr>
+              <td>J</td>
+              <td>Late to School (Arrived After 8:50am)</td>
+            </tr>
+            <tr>
+              <td>P</td>
+              <td>Permission (Medical/Dental Appointment)</td>
+            </tr>
+            <tr>
+              <td>H</td>
+              <td>Holiday</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="alert-section">
+        <h3 style="text-align: center; font-weight: bold; text-decoration: underline;">Attendance Information</h3>
+        <p>
+          <strong>Did you know?</strong>
+        </p>
+        <div class="key-points">
+          <ul>
+            <li>
+              <strong>80% on a test = A</strong>, but <strong>80% attendance = about 2 months of missed learning</strong>.
+            </li>
+            <li>
+              <strong>15 minutes late every day = 50 hours of missed learning per year.</strong>
+            </li>
+          </ul>
         </div>
-
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Day</th>
-                        <th>1</th>
-                        <th>2</th>
-                        <th>3</th>
-                        <th>4</th>
-                        <th>5</th>
-                        <th>6</th>
-                        <th>7</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Monday</strong></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Tuesday</strong></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Wednesday</strong></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Thursday</strong></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Friday</strong></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <hr>
-        <div class="button-container">
-            <a href="https://forms.office.com/e/YsFRTmdw3v" class="button">Submit Absence Reason</a>
-            <div class="toggle-button">
-                <button onclick="toggleLegend()">View Legend</button>
-            </div>
-        </div>
-
-        <hr>
-
-        <div class="legend" id="legendTable" style="display: none;">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Code</th>
-                        <th>Meaning</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>-</td>
-                        <td>Present</td>
-                    </tr>
-                    <tr>
-                        <td>~</td>
-                        <td>Other in School Activity</td>
-                    </tr>
-                    <tr>
-                        <td>T</td>
-                        <td>Absent (Unexplained)</td>
-                    </tr>
-                    <tr>
-                        <td>D</td>
-                        <td>Explained Absence (Reason Provided by Parent/Carer)</td>
-                    </tr>
-                    <tr>
-                        <td>U</td>
-                        <td>Truancy or Unauthorised Absence</td>
-                    </tr>
-                    <tr>
-                        <td>J</td>
-                        <td>Late to School (Arrived After 8:50am)</td>
-                    </tr>
-                    <tr>
-                        <td>P</td>
-                        <td>Permission (Medical/Dental Appointment)</td>
-                    </tr>
-                    <tr>
-                        <td>H</td>
-                        <td>Holiday</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-<div class="alert-section">
-    <h3 style="text-align: center; font-weight: bold; text-decoration: underline;">Attendance Information</h3>
-    <p><strong>Did you know?</strong></p>
-    <div class="key-points">
-        <ul>
-            <li><strong>80% on a test = A</strong>, but <strong>80% attendance = about 2 months of
-                    missed learning</strong>.</li>
-            <li><strong>15 minutes late every day = 50 hours of missed learning per year.</strong></li>
-        </ul>
-    </div>
-
-    <div class="missed-learning">
-        <h4 style="text-align: left; font-weight: bold;">How much learning has been missed?</h4>
-        <table style="width: 100%; table-layout: fixed;">
+        <div class="missed-learning">
+          <h4 style="text-align: left; font-weight: bold;">How much learning has been missed?</h4>
+          <table style="width: 100%; table-layout: fixed;">
             <thead>
-                <tr>
-                    <th>Attendance</th>
-                    <th>Missed Learning</th>
-                </tr>
+              <tr>
+                <th>Attendance</th>
+                <th>Missed Learning</th>
+              </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>98%</td>
-                    <td>About 4 days</td>
-                </tr>
-                <tr>
-                    <td>96%</td>
-                    <td>About 7-8 days</td>
-                </tr>
-                <tr>
-                    <td>95%</td>
-                    <td>About 2 weeks</td>
-                </tr>
-                <tr>
-                    <td>93%</td>
-                    <td>About 3 weeks</td>
-                </tr>
-                <tr>
-                    <td>90%</td>
-                    <td>About 1 month</td>
-                </tr>
-                <tr>
-                    <td>80%</td>
-                    <td>About 2 months</td>
-                </tr>
+              <tr>
+                <td>98%</td>
+                <td>About 4 days</td>
+              </tr>
+              <tr>
+                <td>96%</td>
+                <td>About 7-8 days</td>
+              </tr>
+              <tr>
+                <td>95%</td>
+                <td>About 2 weeks</td>
+              </tr>
+              <tr>
+                <td>93%</td>
+                <td>About 3 weeks</td>
+              </tr>
+              <tr>
+                <td>90%</td>
+                <td>About 1 month</td>
+              </tr>
+              <tr>
+                <td>80%</td>
+                <td>About 2 months</td>
+              </tr>
             </tbody>
-        </table>
-    </div>
-
-    <!-- New Table Section -->
-    <div class="missed-learning">
-        <h4 style="text-align: left; font-weight: bold;">Attendance Ratings</h4>
-        <table style="width: 100%; table-layout: fixed;">
+          </table>
+        </div>
+        <!-- New Table Section -->
+        <div class="missed-learning">
+          <h4 style="text-align: left; font-weight: bold;">Attendance Ratings</h4>
+          <table style="width: 100%; table-layout: fixed;">
             <thead>
-                <tr>
-                    <th>Attendance</th>
-                    <th>Rating</th>
-                </tr>
+              <tr>
+                <th>Attendance</th>
+                <th>Rating</th>
+              </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>100%</td>
-                    <td>Excellent</td>
-                </tr>
-                <tr>
-                    <td>>95%</td>
-                    <td>Very good</td>
-                </tr>
-                <tr>
-                    <td>>90%</td>
-                    <td>Good</td>
-                </tr>
-                <tr>
-                    <td>80-89%</td>
-                    <td>At Risk</td>
-                </tr>
-                <tr>
-                    <td>60-79%</td>
-                    <td>Poor</td>
-                </tr>
-                <tr>
-                    <td>&lt;60%</td>
-                    <td>Very poor</td>
-                </tr>
+              <tr>
+                <td>100%</td>
+                <td>Excellent</td>
+              </tr>
+              <tr>
+                <td>>95%</td>
+                <td>Very good</td>
+              </tr>
+              <tr>
+                <td>>90%</td>
+                <td>Good</td>
+              </tr>
+              <tr>
+                <td>80-89%</td>
+                <td>At Risk</td>
+              </tr>
+              <tr>
+                <td>60-79%</td>
+                <td>Poor</td>
+              </tr>
+              <tr>
+                <td>&lt;60%</td>
+                <td>Very poor</td>
+              </tr>
             </tbody>
-        </table>
-    </div>
-</div>
-
+          </table>
         </div>
+      </div>
     </div>
-
-<script>
-    // Function to parse query parameters from the URL
-    function getQueryParams() {
+    <script>
+      // Function to parse query parameters from the URL
+      function getQueryParams() {
         const params = {};
         const queryString = window.location.search.substring(1);
         const pairs = queryString.split("&");
-
         pairs.forEach(pair => {
-            const [key, value] = pair.split("=");
-            params[decodeURIComponent(key)] = decodeURIComponent(value || "");
+          const [key, value] = pair.split("=");
+          params[decodeURIComponent(key)] = decodeURIComponent(value || "");
         });
-
         return params;
-    }
-
-    // Function to convert Excel date to JavaScript date
-    function convertExcelDateToJSDate(excelDate) {
-        // Excel epoch starts at 1900-01-01, JavaScript epoch starts at 1970-01-01
-        const excelEpochOffset = new Date(1899, 11, 30).getTime(); // Excel's epoch is December 30, 1899
+      }
+      // Function to convert Excel date to JavaScript date
+      function convertExcelDateToJSDate(excelDate) {
+        const excelEpochOffset = new Date(1899, 11, 30).getTime();
         const millisecondsPerDay = 86400000;
         return new Date(excelEpochOffset + excelDate * millisecondsPerDay);
-    }
-
-    // Function to update the HTML dynamically
-    function populateReport() {
+      }
+      // Function to update the HTML dynamically
+      function populateReport() {
         const params = getQueryParams();
-
         // Update name
         if (params.forename && params.surname) {
-            const nameElement = document.querySelector('.name');
-            nameElement.textContent = `${params.forename} ${params.surname}`;
+          const nameElement = document.querySelector('.name');
+          nameElement.textContent = `${params.forename} ${params.surname}`;
         }
-
         // Update stage and tutor group
         if (params.stage && params['tutor']) {
-            document.querySelectorAll('.info-item .body')[0].textContent = params.stage;
-            document.querySelectorAll('.info-item .body')[1].textContent = params['tutor'];
+          document.querySelectorAll('.info-item .body')[0].textContent = params.stage;
+          document.querySelectorAll('.info-item .body')[1].textContent = params['tutor'];
         }
-
         // Update attendance
         if (params.att) {
-            document.querySelectorAll('.info-item .body')[2].textContent = `${params.att}%`;
+          document.querySelectorAll('.info-item .body')[2].textContent = `${params.att}%`;
         }
-
-        // Update attendance rating
+        // Update attendance rating with colour classes
         if (params.att_rating) {
-            document.querySelectorAll('.info-item .body')[3].textContent = params.att_rating || "N/A";
+          const ratingElement = document.querySelectorAll('.info-item .body')[3];
+          ratingElement.textContent = params.att_rating;
+          if (params.att_rating === "Excellent") ratingElement.classList.add("excellent");
+          else if (params.att_rating === "Very good") ratingElement.classList.add("very-good");
+          else if (params.att_rating === "Good") ratingElement.classList.add("good");
+          else if (params.att_rating === "At Risk") ratingElement.classList.add("at-risk");
+          else if (params.att_rating === "Poor") ratingElement.classList.add("poor");
+          else if (params.att_rating === "Very poor") ratingElement.classList.add("very-poor");
         }
-
-        // Update timetable table
-        const days = ["mon", "tue", "wed", "thu", "fri"];
-        days.forEach((day, dayIndex) => {
-            for (let i = 1; i <= 7; i++) {
-                const cellValue = params[`${day}${i}`];
-                if (cellValue !== undefined) {
-                    const cell = document.querySelector(`tbody tr:nth-child(${dayIndex + 1}) td:nth-child(${i + 1})`);
-                    cell.textContent = cellValue || "";
-                }
-            }
+        // Colour "T" cells in red in the attendance table
+        const tableCells = document.querySelectorAll('tbody td'); // Select all table cells
+        tableCells.forEach(cell => {
+          if (cell.textContent.trim() === "T") {
+            cell.classList.add("attendance-T");
+          }
         });
-
         // Update week beginning
         if (params.date) {
-            const dateElement = document.querySelector('.week-beginning h2');
-            const date = convertExcelDateToJSDate(Number(params.date));
-            dateElement.textContent = `Week Beginning: ${date.toLocaleDateString("en-GB", {
+          const dateElement = document.querySelector('.week-beginning h2');
+          const date = convertExcelDateToJSDate(Number(params.date));
+          dateElement.textContent = `Week Beginning: ${date.toLocaleDateString("en-GB", {
                 weekday: "long",
                 day: "numeric",
                 month: "long",
                 year: "numeric"
             })}`;
         }
-    }
-
-    // Function to toggle the visibility of the legend
-    function toggleLegend() {
+      }
+      // Function to toggle the visibility of the legend
+      function toggleLegend() {
         const legend = document.getElementById('legendTable');
         legend.style.display = legend.style.display === 'none' ? 'block' : 'none';
-    }
-
-    // Run the populateReport function on page load
-    window.onload = populateReport;
-</script>
-
-</body>
-
+      }
+      // Run the populateReport function on page load
+      window.onload = populateReport;
+    </script>
+  </body>
 </html>
