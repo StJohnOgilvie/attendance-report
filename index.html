@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEST RATING3 St John Ogilvie Attendance Report</title>
+    <title>TEST RATING1 St John Ogilvie Attendance Report</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -291,44 +291,40 @@
 
 .attendance-rating {
     font-weight: bold;
-    padding: 5px 10px;
+    padding: 5px;
     border-radius: 5px;
     text-align: center;
-    display: inline-block; /* Aligns neatly around the text */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
 }
 
 .excellent {
-    background-color: #ffffff !important; /* Clean white background */
-    color: #155724 !important; /* Dark green text */
+    background-color: #d4edda !important; /* Light green */
+    color: #155724 !important; /* Dark green */
 }
 
 .very-good {
-    background-color: #ffffff !important; /* Clean white background */
-    color: #004085 !important; /* Dark blue text */
+    background-color: #cce5ff !important; /* Light blue */
+    color: #004085 !important; /* Dark blue */
 }
 
 .good {
-    background-color: #ffffff !important; /* Clean white background */
-    color: #856404 !important; /* Dark yellow text */
+    background-color: #fff3cd !important; /* Light yellow */
+    color: #856404 !important; /* Dark yellow */
 }
 
 .at-risk {
-    background-color: #ffffff !important; /* Clean white background */
-    color: #721c24 !important; /* Dark red text */
+    background-color: #f8d7da !important; /* Light red */
+    color: #721c24 !important; /* Dark red */
 }
 
 .poor {
-    background-color: #ffffff !important; /* Clean white background */
-    color: #721c24 !important; /* Dark red text */
+    background-color: #f5c6cb !important; /* Pale red */
+    color: #721c24 !important; /* Dark red */
 }
 
 .very-poor {
-    background-color: #ffffff !important; /* Clean white background */
-    color: #6e0b18 !important; /* Dark maroon text */
+    background-color: #f0b0b8 !important; /* Strong red */
+    color: #6e0b18 !important; /* Dark maroon */
 }
-
-
 
 
 
@@ -629,7 +625,7 @@
         // Update name
         if (params.forename && params.surname) {
             const nameElement = document.querySelector('.name');
-            nameElement.textContent = `${params.forename} ${params.surname}`;
+            nameElement.textContent = ${params.forename} ${params.surname};
         }
 
         // Update stage and tutor group
@@ -640,7 +636,7 @@
 
         // Update attendance
         if (params.att) {
-            document.querySelectorAll('.info-item .body')[2].textContent = `${params.att}%`;
+            document.querySelectorAll('.info-item .body')[2].textContent = ${params.att}%;
         }
 
 
@@ -700,9 +696,9 @@ if (params.att_rating) {
         const days = ["mon", "tue", "wed", "thu", "fri"];
         days.forEach((day, dayIndex) => {
             for (let i = 1; i <= 7; i++) {
-                const cellValue = params[`${day}${i}`];
+                const cellValue = params[${day}${i}];
                 if (cellValue !== undefined) {
-                    const cell = document.querySelector(`tbody tr:nth-child(${dayIndex + 1}) td:nth-child(${i + 1})`);
+                    const cell = document.querySelector(tbody tr:nth-child(${dayIndex + 1}) td:nth-child(${i + 1}));
                     cell.textContent = cellValue || "";
                 }
             }
@@ -712,12 +708,12 @@ if (params.att_rating) {
         if (params.date) {
             const dateElement = document.querySelector('.week-beginning h2');
             const date = convertExcelDateToJSDate(Number(params.date));
-            dateElement.textContent = `Week Beginning: ${date.toLocaleDateString("en-GB", {
+            dateElement.textContent = Week Beginning: ${date.toLocaleDateString("en-GB", {
                 weekday: "long",
                 day: "numeric",
                 month: "long",
                 year: "numeric"
-            })}`;
+            })};
         }
     }
 
