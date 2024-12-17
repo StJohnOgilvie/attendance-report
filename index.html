@@ -117,16 +117,18 @@
             border-top-right-radius: 8px;
         }
 
-        .info-box .info-item .body {
-            background: white;
-            color: #333;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-top: none;
-            border-bottom-left-radius: 8px;
-            border-bottom-right-radius: 8px;
-            position: relative; /* Allows positioning of child elements */
-        }
+.info-box .info-item .body {
+    background: #ffffff; /* Clean white background */
+    color: #333;
+    padding: 10px; /* Padding ensures spacing */
+    border: 1px solid #ddd;
+    border-top: none;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    display: flex;
+    justify-content: center; /* Centres content horizontally */
+    align-items: center; /* Centres content vertically */
+}
 
         hr {
             border: 0;
@@ -287,17 +289,19 @@
 
 
 
+/* Pill shape for the rating */
 .attendance-rating {
     font-weight: bold;
-    position: relative;
-    display: inline-block; /* Makes the pill wrap tightly around the text */
-    padding: 5px 15px;
+    display: inline-flex; /* Wrap text tightly */
+    justify-content: center;
+    align-items: center;
+    padding: 5px 15px; /* Space around text */
     border-radius: 20px; /* Makes the pill shape */
-    color: #ffffff; /* White text for contrast */
-    z-index: 1;
+    color: #ffffff; /* White text for better readability */
+    line-height: 1.2;
 }
 
-/* Background colour for the pill */
+/* Background colours for each rating */
 .excellent {
     background-color: #28a745; /* Bright Green */
 }
