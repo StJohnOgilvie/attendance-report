@@ -347,7 +347,7 @@
           </div>
           <div class="info-item">
             <div class="header">Rating</div>
-            <div class="body">...</div>
+            <div class="body"></div>
           </div>
         </div>
       </div>
@@ -577,78 +577,102 @@
         </div>
       </div>
     </div>
-    <script>
-      // Function to parse query parameters from the URL
-      function getQueryParams() {
-        const params = {};
-        const queryString = window.location.search.substring(1);
-        const pairs = queryString.split("&");
-        pairs.forEach(pair => {
-          const [key, value] = pair.split("=");
-          params[decodeURIComponent(key)] = decodeURIComponent(value || "");
-        });
-        return params;
-      }
-      // Function to convert Excel date to JavaScript date
-      function convertExcelDateToJSDate(excelDate) {
-        const excelEpochOffset = new Date(1899, 11, 30).getTime();
-        const millisecondsPerDay = 86400000;
-        return new Date(excelEpochOffset + excelDate * millisecondsPerDay);
-      }
-      // Function to update the HTML dynamically
-      function populateReport() {
-        const params = getQueryParams();
-        // Update name
-        if (params.forename && params.surname) {
-          const nameElement = document.querySelector('.name');
-          nameElement.textContent = `${params.forename} ${params.surname}`;
-        }
-        // Update stage and tutor group
-        if (params.stage && params['tutor']) {
-          document.querySelectorAll('.info-item .body')[0].textContent = params.stage;
-          document.querySelectorAll('.info-item .body')[1].textContent = params['tutor'];
-        }
-        // Update attendance
-        if (params.att) {
-          document.querySelectorAll('.info-item .body')[2].textContent = `${params.att}%`;
-        }
-        // Update attendance rating with colour classes
-        if (params.att_rating) {
-          const ratingElement = document.querySelectorAll('.info-item .body')[3];
-          ratingElement.textContent = params.att_rating;
-          if (params.att_rating === "Excellent") ratingElement.classList.add("excellent");
-          else if (params.att_rating === "Very good") ratingElement.classList.add("very-good");
-          else if (params.att_rating === "Good") ratingElement.classList.add("good");
-          else if (params.att_rating === "At Risk") ratingElement.classList.add("at-risk");
-          else if (params.att_rating === "Poor") ratingElement.classList.add("poor");
-          else if (params.att_rating === "Very poor") ratingElement.classList.add("very-poor");
-        }
-        // Colour "T" cells in red in the attendance table
-        const tableCells = document.querySelectorAll('tbody td'); // Select all table cells
-        tableCells.forEach(cell => {
-          if (cell.textContent.trim() === "T") {
-            cell.classList.add("attendance-T");
-          }
-        });
-        // Update week beginning
-        if (params.date) {
-          const dateElement = document.querySelector('.week-beginning h2');
-          const date = convertExcelDateToJSDate(Number(params.date));
-          dateElement.textContent = `Week Beginning: ${date.toLocaleDateString("en-GB", {
-                weekday: "long",
-                day: "numeric",
-                month: "long",
-                year: "numeric"
-            })}`;
-        }
-      }
-      // Function to toggle the visibility of the legend
-      function toggleLegend() {
-        const legend = document.getElementById('legendTable');
-        legend.style.display = legend.style.display === 'none' ? 'block' : 'none';
-      }
-      // Run the populateReport function on page load
-      window.onload = populateReport;
-    </script>
+    
+    
+<script>
+// Function to parse query parameters from the URL
+function getQueryParams() {
+  const params = {};
+  const queryString = window.location.search.substring(1);
+  const pairs = queryString.split("&");
+  pairs.forEach(pair => {
+    const [key, value] = pair.split("=");
+    params[decodeURIComponent(key)] = decodeURIComponent(value || "");
+  });
+  return params;
+}
+
+// Function to convert Excel date to JavaScript date
+function convertExcelDateToJSDate(excelDate) {
+  const excelEpochOffset = new Date(1899, 11, 30).getTime();
+  const millisecondsPerDay = 86400000;
+  return new Date(excelEpochOffset + excelDate * millisecondsPerDay);
+}
+
+// Function to update the HTML dynamically
+function populateReport() {
+  const params = getQueryParams();
+
+  // Update name
+  if (params.forename && params.surname) {
+    const nameElement = document.querySelector('.name');
+    nameElement.textContent = `${params.forename} ${params.surname}`;
+  }
+
+  // Update stage and tutor group
+  if (params.stage && params['tutor']) {
+    document.querySelectorAll('.info-item .body')[0].textContent = params.stage;
+    document.querySelectorAll('.info-item .body')[1].textContent = params['tutor'];
+  }
+
+  // Update attendance
+  if (params.att) {
+    document.querySelectorAll('.info-item .body')[2].textContent = `${params.att}%`;
+  }
+
+  // Update attendance rating with colour classes
+  if (params.att_rating) {
+    const ratingElement = document.querySelectorAll('.info-item .body')[3];
+    ratingElement.textContent = params.att_rating;
+
+    // Remove any existing rating classes
+    ratingElement.classList.remove("excellent", "very-good", "good", "at-risk", "poor", "very-poor");
+
+    // Add new class based on attendance rating
+    if (params.att_rating === "Excellent") ratingElement.classList.add("excellent");
+    else if (params.att_rating === "Very good") ratingElement.classList.add("very-good");
+    else if (params.att_rating === "Good") ratingElement.classList.add("good");
+    else if (params.att_rating === "At Risk") ratingElement.classList.add("at-risk");
+    else if (params.att_rating === "Poor") ratingElement.classList.add("poor");
+    else if (params.att_rating === "Very poor") ratingElement.classList.add("very-poor");
+  }
+
+  // Colour "T" cells in red in the attendance table
+  const tableCells = document.querySelectorAll('tbody td');
+  tableCells.forEach(cell => {
+    if (cell.textContent.trim() === "T") {
+      cell.classList.add("attendance-T");
+    }
+  });
+
+  // Update week beginning
+  if (params.date) {
+    const dateElement = document.querySelector('.week-beginning h2');
+    const date = convertExcelDateToJSDate(Number(params.date));
+    dateElement.textContent = `Week Beginning: ${date.toLocaleDateString("en-GB", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    })}`;
+  }
+}
+
+// Function to toggle the visibility of the legend
+function toggleLegend() {
+  const legend = document.getElementById('legendTable');
+  legend.style.display = legend.style.display === 'none' ? 'block' : 'none';
+}
+
+// Run the populateReport function on page load
+window.onload = populateReport;
+
+
+
+
+</script>
+    
+    
+    
   </body>
 </html>
