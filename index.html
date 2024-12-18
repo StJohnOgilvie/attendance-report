@@ -463,7 +463,7 @@
         </div>
         <hr>
         <div class="button-container">
-            <a href="https://forms.office.com/e/YsFRTmdw3v" class="button">Submit Absence Reason</a>
+            <a id="formLink" href="#" class="button">Submit Absence Reason</a>
             <div class="toggle-button">
                 <button onclick="toggleLegend()">View Legend</button>
             </div>
@@ -610,132 +610,153 @@
 
 
 <script>
-    
-// Function to parse query parameters from the URL
-function getQueryParams() {
-    const params = {};
-    const queryString = window.location.search.substring(1);
-    const pairs = queryString.split("&");
+    // Function to parse query parameters from the URL
+    function getQueryParams() {
+        const params = {};
+        const queryString = window.location.search.substring(1);
+        const pairs = queryString.split("&");
 
-    pairs.forEach(pair => {
-        const [key, value] = pair.split("=");
-        params[decodeURIComponent(key)] = decodeURIComponent(value || "");
-    });
+        pairs.forEach(pair => {
+            const [key, value] = pair.split("=");
+            params[decodeURIComponent(key)] = decodeURIComponent(value || "");
+        });
 
-    return params;
-}
-
-// Function to convert Excel date to JavaScript date
-function convertExcelDateToJSDate(excelDate) {
-    const excelEpochOffset = new Date(1899, 11, 30).getTime();
-    const millisecondsPerDay = 86400000;
-    return new Date(excelEpochOffset + excelDate * millisecondsPerDay);
-}
-
-// Function to update the HTML dynamically
-function populateReport() {
-    const params = getQueryParams();
-
-    // Update name
-    if (params.forename && params.surname) {
-        const nameElement = document.querySelector('.name');
-        nameElement.textContent = `${params.forename} ${params.surname}`;
+        return params;
     }
 
-    // Update stage and tutor group
-    if (params.stage && params['tutor']) {
-        document.querySelectorAll('.info-item .body')[0].textContent = params.stage;
-        document.querySelectorAll('.info-item .body')[1].textContent = params['tutor'];
+    // Function to populate the MS Form link dynamically with pre-filled values
+    function populateFormLink() {
+        const params = getQueryParams();
+        const formBaseURL = "https://forms.office.com/Pages/ResponsePage.aspx?id=oyzTzM4Wj0KVQTctawUZKWwGg9Lg2ClGjKrAUV-kvn1UM0FHQ0g3N0ZXNzNDWVExNUxCWkNXOEU4WC4u";
+
+        // Extract necessary values from the URL parameters
+        const childName = params.forename && params.surname ? `${params.forename} ${params.surname}` : "";
+        const stage = params.stage || "";
+
+        // Construct the pre-filled query string
+        const preFilledParams = new URLSearchParams({
+            ref2df91636c941259a8c166121a7b404: childName,
+            r0c11494f57c44072ac9f1c84895fc223: stage
+        });
+
+        // Update the link with the pre-filled parameters
+        const fullFormURL = `${formBaseURL}&${preFilledParams.toString()}`;
+        document.getElementById("formLink").setAttribute("href", fullFormURL);
     }
 
-    // Update attendance
-    if (params.att) {
-        const attendance = parseFloat(params.att);
-        document.querySelectorAll('.info-item .body')[2].textContent = !isNaN(attendance) ? `${attendance}%` : "N/A";
+    // Function to convert Excel date to JavaScript date
+    function convertExcelDateToJSDate(excelDate) {
+        const excelEpochOffset = new Date(1899, 11, 30).getTime();
+        const millisecondsPerDay = 86400000;
+        return new Date(excelEpochOffset + excelDate * millisecondsPerDay);
     }
 
-    // Update attendance rating with severity highlighting
-    if (params.att_rating) {
-        const ratingElement = document.querySelectorAll('.info-item .body')[3];
-        const cleanedRating = (params.att_rating || "").trim().toLowerCase();
+    // Function to update the HTML dynamically
+    function populateReport() {
+        const params = getQueryParams();
 
-        ratingElement.textContent = params.att_rating.trim();
-
-        // Apply background colour classes based on cleaned rating
-        switch (cleanedRating) {
-            case "excellent":
-                ratingElement.classList.add("attendance-rating", "excellent");
-                break;
-            case "very good":
-                ratingElement.classList.add("attendance-rating", "very-good");
-                break;
-            case "good":
-                ratingElement.classList.add("attendance-rating", "good");
-                break;
-            case "at risk":
-                ratingElement.classList.add("attendance-rating", "at-risk");
-                break;
-            case "poor":
-                ratingElement.classList.add("attendance-rating", "poor");
-                break;
-            case "very poor":
-                ratingElement.classList.add("attendance-rating", "very-poor");
-                break;
-            default:
-                ratingElement.textContent = "N/A";
-                break;
+        // Update name
+        if (params.forename && params.surname) {
+            const nameElement = document.querySelector('.name');
+            nameElement.textContent = `${params.forename} ${params.surname}`;
         }
-    }
 
-    // Update timetable table
-    const days = ["mon", "tue", "wed", "thu", "fri"];
-    days.forEach((day, dayIndex) => {
-        for (let i = 1; i <= 7; i++) {
-            const cellValue = params[`${day}${i}`];
-            if (cellValue !== undefined) {
-                const cell = document.querySelector(`tbody tr:nth-child(${dayIndex + 1}) td:nth-child(${i + 1})`);
-                cell.textContent = cellValue || "";
+        // Update stage and tutor group
+        if (params.stage && params['tutor']) {
+            document.querySelectorAll('.info-item .body')[0].textContent = params.stage;
+            document.querySelectorAll('.info-item .body')[1].textContent = params['tutor'];
+        }
+
+        // Update attendance
+        if (params.att) {
+            const attendance = parseFloat(params.att);
+            document.querySelectorAll('.info-item .body')[2].textContent = !isNaN(attendance) ? `${attendance}%` : "N/A";
+        }
+
+        // Update attendance rating with severity highlighting
+        if (params.att_rating) {
+            const ratingElement = document.querySelectorAll('.info-item .body')[3];
+            const cleanedRating = (params.att_rating || "").trim().toLowerCase();
+
+            ratingElement.textContent = params.att_rating.trim();
+
+            // Apply background colour classes based on cleaned rating
+            switch (cleanedRating) {
+                case "excellent":
+                    ratingElement.classList.add("attendance-rating", "excellent");
+                    break;
+                case "very good":
+                    ratingElement.classList.add("attendance-rating", "very-good");
+                    break;
+                case "good":
+                    ratingElement.classList.add("attendance-rating", "good");
+                    break;
+                case "at risk":
+                    ratingElement.classList.add("attendance-rating", "at-risk");
+                    break;
+                case "poor":
+                    ratingElement.classList.add("attendance-rating", "poor");
+                    break;
+                case "very poor":
+                    ratingElement.classList.add("attendance-rating", "very-poor");
+                    break;
+                default:
+                    ratingElement.textContent = "N/A";
+                    break;
             }
         }
-    });
 
-    // Update week beginning
-    if (params.date) {
-        const dateElement = document.querySelector('.week-beginning h2');
-        const date = convertExcelDateToJSDate(Number(params.date));
-        dateElement.textContent = `Week Beginning: ${date.toLocaleDateString("en-GB", {
-            weekday: "long",
-            day: "numeric",
-            month: "long",
-            year: "numeric"
-        })}`;
-    }
-}
+        // Update timetable table
+        const days = ["mon", "tue", "wed", "thu", "fri"];
+        days.forEach((day, dayIndex) => {
+            for (let i = 1; i <= 7; i++) {
+                const cellValue = params[`${day}${i}`];
+                if (cellValue !== undefined) {
+                    const cell = document.querySelector(`tbody tr:nth-child(${dayIndex + 1}) td:nth-child(${i + 1})`);
+                    cell.textContent = cellValue || "";
+                }
+            }
+        });
 
-// Highlight specific characters ('T' and 'J') with styles
-function highlightAttendanceCodes() {
-    const tableCells = document.querySelectorAll(".table-wrapper table tbody td");
-    tableCells.forEach(cell => {
-        if (cell.textContent.trim() === 'T') {
-            cell.classList.add('t-red');
-        } else if (cell.textContent.trim() === 'J') {
-            cell.classList.add('j-amber');
+        // Update week beginning
+        if (params.date) {
+            const dateElement = document.querySelector('.week-beginning h2');
+            const date = convertExcelDateToJSDate(Number(params.date));
+            dateElement.textContent = `Week Beginning: ${date.toLocaleDateString("en-GB", {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            })}`;
         }
-    });
-}
+    }
 
-// Function to toggle the visibility of the legend
-function toggleLegend() {
-    const legend = document.getElementById('legendTable');
-    legend.style.display = legend.style.display === 'none' ? 'block' : 'none';
-}
+    // Highlight specific characters ('T' and 'J') with styles
+    function highlightAttendanceCodes() {
+        const tableCells = document.querySelectorAll(".table-wrapper table tbody td");
+        tableCells.forEach(cell => {
+            if (cell.textContent.trim() === 'T') {
+                cell.classList.add('t-red');
+            } else if (cell.textContent.trim() === 'J') {
+                cell.classList.add('j-amber');
+            }
+        });
+    }
 
-// Run the populateReport function and highlight codes on page load
-window.onload = () => {
-    populateReport();
-    highlightAttendanceCodes();
-};
+    // Function to toggle the visibility of the legend
+    function toggleLegend() {
+        const legend = document.getElementById('legendTable');
+        legend.style.display = legend.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // Run the populateReport, highlight codes, and populateFormLink functions on page load
+    window.onload = () => {
+        populateReport();
+        highlightAttendanceCodes();
+        populateFormLink();
+    };
 </script>
+
 
 
 
