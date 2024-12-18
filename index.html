@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Link1 St John Ogilvie Attendance Report</title>
+    <title>Test Remove1 St John Ogilvie Attendance Report</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -369,6 +369,7 @@
         <div class="info-section">
             <div class="name">Loading Data</div>
             <div class="info-box">
+                <!--
                 <div class="info-item">
                     <div class="header">Stage</div>
                     <div class="body">...</div>
@@ -377,6 +378,7 @@
                     <div class="header">Tutor</div>
                     <div class="body">...</div>
                 </div>
+                -->
                 <div class="info-item">
                     <div class="header">Attendance</div>
                     <div class="body">%</div>
@@ -657,11 +659,16 @@
     function populateReport() {
         const params = getQueryParams();
 
-        // Update name
+        // Update name and append tutor
         if (params.forename && params.surname) {
             const nameElement = document.querySelector('.name');
+            let tutorGroup = params['tutor'] || ''; // Fallback for tutor value
             nameElement.textContent = `${params.forename} ${params.surname}`;
+            if (tutorGroup) {
+                nameElement.textContent += ` (${tutorGroup})`;
+            }
         }
+
 
         // Update stage and tutor group
         if (params.stage && params['tutor']) {
