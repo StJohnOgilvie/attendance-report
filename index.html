@@ -657,11 +657,19 @@
     function populateReport() {
         const params = getQueryParams();
 
-        // Update name
-        if (params.forename && params.surname) {
-            const nameElement = document.querySelector('.name');
-            nameElement.textContent = `${params.forename} ${params.surname}`;
+    // Update name and append tutor
+    if (params.forename && params.surname) {
+        const nameElement = document.querySelector('.name');
+        let tutorGroup = params['tutor'] || ''; // Fallback for tutor value
+        nameElement.textContent = `${params.forename} ${params.surname}`;
+        if (tutorGroup) {
+            nameElement.textContent += ` (${tutorGroup})`;
         }
+    }
+        
+        
+        
+        
 
         // Update stage and tutor group
         if (params.stage && params['tutor']) {
