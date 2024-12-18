@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Link2 St John Ogilvie Attendance Report</title>
+    <title>Test Link3 St John Ogilvie Attendance Report</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -628,21 +628,23 @@
     function populateFormLink() {
         const params = getQueryParams();
         const formBaseURL = "https://forms.office.com/Pages/ResponsePage.aspx?id=oyzTzM4Wj0KVQTctawUZKWwGg9Lg2ClGjKrAUV-kvn1UM0FHQ0g3N0ZXNzNDWVExNUxCWkNXOEU4WC4u";
-
+    
         // Extract necessary values from the URL parameters
-        const childName = params.forename && params.surname ? `${params.forename} ${params.surname}` : "";
+        const childName = params.forename && params.surname ? `${params.forename} ${params.surname}`.replace(/\s/g, '%20') : "";
         const stage = params.stage || "";
-
+    
         // Construct the pre-filled query string
         const preFilledParams = new URLSearchParams({
             r2724943f68694227a344aa82c09f00db: childName,
             r0c11494f57c44072ac9f1c84895fc223: stage
         });
-
+    
         // Update the link with the pre-filled parameters
         const fullFormURL = `${formBaseURL}&${preFilledParams.toString()}`;
         document.getElementById("formLink").setAttribute("href", fullFormURL);
     }
+
+
 
     // Function to convert Excel date to JavaScript date
     function convertExcelDateToJSDate(excelDate) {
