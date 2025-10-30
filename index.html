@@ -272,9 +272,9 @@
             background: white;
             color: black;
         }
-        
-        
-        
+
+
+
         .alert-section th,
         .alert-section td {
             border: 1px solid #b22222;
@@ -286,76 +286,113 @@
             background: #228b22;
             color: white;
         }
-        
-        
-/* ############################################################################ */
+
+
+        /* ############################################################################ */
 
 
 
 
-       .attendance-rating {
-        font-weight: bold;
-        padding: 5px;
-        border-radius: 5px;
-        text-align: center;
-    }
-    
-.excellent {
-    background-color: #28a745 !important; /* Bright Green */
-    color: #ffffff !important; /* White text */
-}
+        .attendance-rating {
+            font-weight: bold;
+            padding: 5px;
+            border-radius: 5px;
+            text-align: center;
+        }
 
-.very-good {
-    background-color: #7bc043 !important; /* Soft Green */
-    color: #ffffff !important; /* White text */
-}
+        .excellent {
+            background-color: #28a745 !important;
+            /* Bright Green */
+            color: #ffffff !important;
+            /* White text */
+        }
 
-.good {
-    background-color: #ffc107 !important; /* Yellow */
-    color: #333333 !important; /* Darker text for contrast */
-}
+        .very-good {
+            background-color: #7bc043 !important;
+            /* Soft Green */
+            color: #ffffff !important;
+            /* White text */
+        }
 
-.at-risk {
-    background-color: #ff8c00 !important; /* Orange */
-    color: #ffffff !important; /* White text */
-}
+        .good {
+            background-color: #ffc107 !important;
+            /* Yellow */
+            color: #333333 !important;
+            /* Darker text for contrast */
+        }
 
-.poor {
-    background-color: #ff4c4c !important; /* Bright Red */
-    color: #ffffff !important; /* White text */
-}
+        .at-risk {
+            background-color: #ff8c00 !important;
+            /* Orange */
+            color: #ffffff !important;
+            /* White text */
+        }
 
-.very-poor {
-    background-color: #b22222 !important; /* Dark Red */
-    color: #ffffff !important; /* White text */
-}
+        .poor {
+            background-color: #ff4c4c !important;
+            /* Bright Red */
+            color: #ffffff !important;
+            /* White text */
+        }
 
-
-/* ############################################################################ */
-
-
-
-.t-red {
-    color: red;
-    font-weight: bold;
-}
-
-.j-amber {
-    color: #ffbf00; /* Amber Colour */
-    font-weight: bold;
-}
-
-#stage-box, #tutor-box {
-    display: none; /* Ensures elements are hidden */
-}
+        .very-poor {
+            background-color: #b22222 !important;
+            /* Dark Red */
+            color: #ffffff !important;
+            /* White text */
+        }
 
 
-        
-
-/* ############################################################################ */
+        /* ############################################################################ */
 
 
-        
+
+        .t-red {
+            color: red;
+            font-weight: bold;
+        }
+
+        .j-amber {
+            color: #ffbf00;
+            /* Amber Colour */
+            font-weight: bold;
+        }
+
+        #stage-box,
+        #tutor-box {
+            display: none;
+            /* Ensures elements are hidden */
+        }
+
+
+
+
+        /* ############################################################################ */
+
+
+
+        .toilet-table th {
+            background: #228B22;
+            color: white;
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .toilet-table td {
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 8px;
+            font-size: 14px;
+            background: white;
+        }
+
+        .spacer {
+            margin: 15px 0;
+            /* same spacing as your <hr> */
+        }
+
+
+        /* ############################################################################ */
     </style>
 </head>
 
@@ -462,6 +499,29 @@
                     </tr>
                 </tbody>
             </table>
+
+
+            <div class="spacer"></div>
+
+
+            <div class="table-wrapper">
+                <table class="toilet-table">
+                    <thead>
+                        <tr>
+                            <th>Toilet Visits This Week</th>
+                            <th>Toilet Visits This Year</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="toiletWeek"><strong></strong></td>
+                            <td id="toiletYear"><strong></strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
         </div>
         <hr>
         <div class="button-container">
@@ -518,253 +578,263 @@
             </table>
         </div>
 
-<div class="alert-section">
-    <h3 style="text-align: center; font-weight: bold; text-decoration: underline;">Attendance Information</h3>
-    <p><strong>Did you know?</strong></p>
-    <div class="key-points">
-        <ul>
-            <li><strong>80% on a test = A</strong>, but <strong>80% attendance = about 2 months of
-                    missed learning</strong>.</li>
-            <li><strong>15 minutes late every day = 50 hours of missed learning per year.</strong></li>
-        </ul>
+        <div class="alert-section">
+            <h3 style="text-align: center; font-weight: bold; text-decoration: underline;">Attendance Information</h3>
+            <p><strong>Did you know?</strong></p>
+            <div class="key-points">
+                <ul>
+                    <li><strong>80% on a test = A</strong>, but <strong>80% attendance = about 2 months of
+                            missed learning</strong>.</li>
+                    <li><strong>15 minutes late every day = 50 hours of missed learning per year.</strong></li>
+                </ul>
+            </div>
+
+            <div class="missed-learning">
+                <h4 style="text-align: left; font-weight: bold;">How much learning has been missed?</h4>
+                <table style="width: 100%; table-layout: fixed;">
+                    <thead>
+                        <tr>
+                            <th>Attendance</th>
+                            <th>Missed Learning</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>98%</td>
+                            <td>About 4 days</td>
+                        </tr>
+                        <tr>
+                            <td>96%</td>
+                            <td>About 7-8 days</td>
+                        </tr>
+                        <tr>
+                            <td>95%</td>
+                            <td>About 2 weeks</td>
+                        </tr>
+                        <tr>
+                            <td>93%</td>
+                            <td>About 3 weeks</td>
+                        </tr>
+                        <tr>
+                            <td>90%</td>
+                            <td>About 1 month</td>
+                        </tr>
+                        <tr>
+                            <td>80%</td>
+                            <td>About 2 months</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- New Table Section -->
+            <div class="missed-learning">
+                <h4 style="text-align: left; font-weight: bold;">Attendance Ratings</h4>
+                <table style="width: 100%; table-layout: fixed;">
+                    <thead>
+                        <tr>
+                            <th>Attendance</th>
+                            <th>Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>100%</td>
+                            <td><span class="attendance-rating excellent">Excellent</span></td>
+                        </tr>
+                        <tr>
+                            <td>>95%</td>
+                            <td><span class="attendance-rating very-good">Very Good</span></td>
+                        </tr>
+                        <tr>
+                            <td>>90%</td>
+                            <td><span class="attendance-rating good">Good</span></td>
+                        </tr>
+                        <tr>
+                            <td>80-89%</td>
+                            <td><span class="attendance-rating at-risk">At Risk</span></td>
+                        </tr>
+                        <tr>
+                            <td>60-79%</td>
+                            <td><span class="attendance-rating poor">Poor</span></td>
+                        </tr>
+                        <tr>
+                            <td>&lt;60%</td>
+                            <td><span class="attendance-rating very-poor">Very Poor</span></td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
     </div>
 
-    <div class="missed-learning">
-        <h4 style="text-align: left; font-weight: bold;">How much learning has been missed?</h4>
-        <table style="width: 100%; table-layout: fixed;">
-            <thead>
-                <tr>
-                    <th>Attendance</th>
-                    <th>Missed Learning</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>98%</td>
-                    <td>About 4 days</td>
-                </tr>
-                <tr>
-                    <td>96%</td>
-                    <td>About 7-8 days</td>
-                </tr>
-                <tr>
-                    <td>95%</td>
-                    <td>About 2 weeks</td>
-                </tr>
-                <tr>
-                    <td>93%</td>
-                    <td>About 3 weeks</td>
-                </tr>
-                <tr>
-                    <td>90%</td>
-                    <td>About 1 month</td>
-                </tr>
-                <tr>
-                    <td>80%</td>
-                    <td>About 2 months</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 
-    <!-- New Table Section -->
-    <div class="missed-learning">
-        <h4 style="text-align: left; font-weight: bold;">Attendance Ratings</h4>
-        <table style="width: 100%; table-layout: fixed;">
-            <thead>
-                <tr>
-                    <th>Attendance</th>
-                    <th>Rating</th>
-                </tr>
-            </thead>
-<tbody>
-    <tr>
-        <td>100%</td>
-        <td><span class="attendance-rating excellent">Excellent</span></td>
-    </tr>
-    <tr>
-        <td>>95%</td>
-        <td><span class="attendance-rating very-good">Very Good</span></td>
-    </tr>
-    <tr>
-        <td>>90%</td>
-        <td><span class="attendance-rating good">Good</span></td>
-    </tr>
-    <tr>
-        <td>80-89%</td>
-        <td><span class="attendance-rating at-risk">At Risk</span></td>
-    </tr>
-    <tr>
-        <td>60-79%</td>
-        <td><span class="attendance-rating poor">Poor</span></td>
-    </tr>
-    <tr>
-        <td>&lt;60%</td>
-        <td><span class="attendance-rating very-poor">Very Poor</span></td>
-    </tr>
-</tbody>
+    <script>
+        // Function to parse query parameters from the URL
+        function getQueryParams() {
+            const params = {};
+            const queryString = window.location.search.substring(1);
+            const pairs = queryString.split("&");
 
-        </table>
-    </div>
-</div>
+            pairs.forEach(pair => {
+                const [key, value] = pair.split("=");
+                params[decodeURIComponent(key)] = decodeURIComponent(value || "");
+            });
 
-    </div>
-
-
-<script>
-    // Function to parse query parameters from the URL
-    function getQueryParams() {
-        const params = {};
-        const queryString = window.location.search.substring(1);
-        const pairs = queryString.split("&");
-
-        pairs.forEach(pair => {
-            const [key, value] = pair.split("=");
-            params[decodeURIComponent(key)] = decodeURIComponent(value || "");
-        });
-
-        return params;
-    }
-
-    // Function to populate the MS Form link dynamically with pre-filled values
-    function populateFormLink() {
-        const params = getQueryParams();
-        const formBaseURL = "https://forms.office.com/Pages/ResponsePage.aspx?id=oyzTzM4Wj0KVQTctawUZKWwGg9Lg2ClGjKrAUV-kvn1UM0FHQ0g3N0ZXNzNDWVExNUxCWkNXOEU4WC4u";
-
-        // Extract necessary values from the URL parameters
-        const forename = params.forename || "";
-        const surname = params.surname || "";
-        const stage = params.stage || "";
-
-        // Construct the pre-filled query string
-        const preFilledParams = new URLSearchParams({
-            ref2df91636c941259a8c166121a7b404: forename,
-            r2724943f68694227a344aa82c09f00db: surname,
-            r0c11494f57c44072ac9f1c84895fc223: stage
-        });
-
-        // Update the link with the pre-filled parameters
-        const fullFormURL = `${formBaseURL}&${preFilledParams.toString()}`;
-        document.getElementById("formLink").setAttribute("href", fullFormURL);
-    }
-
-    // Function to convert Excel date to JavaScript date
-    function convertExcelDateToJSDate(excelDate) {
-        const excelEpochOffset = new Date(1899, 11, 30).getTime();
-        const millisecondsPerDay = 86400000;
-        return new Date(excelEpochOffset + excelDate * millisecondsPerDay);
-    }
-
-    // Function to update the HTML dynamically
-    function populateReport() {
-        const params = getQueryParams();
-
-        // Update name and append tutor
-        if (params.forename && params.surname) {
-            const nameElement = document.querySelector('.name');
-            let tutorGroup = params['tutor'] || ''; // Fallback for tutor value
-            nameElement.textContent = `${params.forename} ${params.surname}`;
-            if (tutorGroup) {
-                nameElement.textContent += ` (${tutorGroup})`;
-            }
+            return params;
         }
 
+        // Function to populate the MS Form link dynamically with pre-filled values
+        function populateFormLink() {
+            const params = getQueryParams();
+            const formBaseURL = "https://forms.office.com/Pages/ResponsePage.aspx?id=oyzTzM4Wj0KVQTctawUZKWwGg9Lg2ClGjKrAUV-kvn1UM0FHQ0g3N0ZXNzNDWVExNUxCWkNXOEU4WC4u";
 
-        // Update stage and tutor group
-        if (params.stage && params['tutor']) {
-            document.querySelectorAll('.info-item .body')[0].textContent = params.stage;
-            document.querySelectorAll('.info-item .body')[1].textContent = params['tutor'];
+            // Extract necessary values from the URL parameters
+            const forename = params.forename || "";
+            const surname = params.surname || "";
+            const stage = params.stage || "";
+
+            // Construct the pre-filled query string
+            const preFilledParams = new URLSearchParams({
+                ref2df91636c941259a8c166121a7b404: forename,
+                r2724943f68694227a344aa82c09f00db: surname,
+                r0c11494f57c44072ac9f1c84895fc223: stage
+            });
+
+            // Update the link with the pre-filled parameters
+            const fullFormURL = `${formBaseURL}&${preFilledParams.toString()}`;
+            document.getElementById("formLink").setAttribute("href", fullFormURL);
         }
 
-        // Update attendance
-        if (params.att) {
-            const attendance = parseFloat(params.att);
-            document.querySelectorAll('.info-item .body')[2].textContent = !isNaN(attendance) ? `${attendance}%` : "N/A";
+        // Function to convert Excel date to JavaScript date
+        function convertExcelDateToJSDate(excelDate) {
+            const excelEpochOffset = new Date(1899, 11, 30).getTime();
+            const millisecondsPerDay = 86400000;
+            return new Date(excelEpochOffset + excelDate * millisecondsPerDay);
         }
 
-        // Update attendance rating with severity highlighting
-        if (params.att_rating) {
-            const ratingElement = document.querySelectorAll('.info-item .body')[3];
-            const cleanedRating = (params.att_rating || "").trim().toLowerCase();
+        // Function to update the HTML dynamically
+        function populateReport() {
+            const params = getQueryParams();
 
-            ratingElement.textContent = params.att_rating.trim();
-
-            // Apply background colour classes based on cleaned rating
-            switch (cleanedRating) {
-                case "excellent":
-                    ratingElement.classList.add("attendance-rating", "excellent");
-                    break;
-                case "very good":
-                    ratingElement.classList.add("attendance-rating", "very-good");
-                    break;
-                case "good":
-                    ratingElement.classList.add("attendance-rating", "good");
-                    break;
-                case "at risk":
-                    ratingElement.classList.add("attendance-rating", "at-risk");
-                    break;
-                case "poor":
-                    ratingElement.classList.add("attendance-rating", "poor");
-                    break;
-                case "very poor":
-                    ratingElement.classList.add("attendance-rating", "very-poor");
-                    break;
-                default:
-                    ratingElement.textContent = "N/A";
-                    break;
-            }
-        }
-
-        // Update timetable table
-        const days = ["mon", "tue", "wed", "thu", "fri"];
-        days.forEach((day, dayIndex) => {
-            for (let i = 1; i <= 7; i++) {
-                const cellValue = params[`${day}${i}`];
-                if (cellValue !== undefined) {
-                    const cell = document.querySelector(`tbody tr:nth-child(${dayIndex + 1}) td:nth-child(${i + 1})`);
-                    cell.textContent = cellValue || "";
+            // Update name and append tutor
+            if (params.forename && params.surname) {
+                const nameElement = document.querySelector('.name');
+                let tutorGroup = params['tutor'] || ''; // Fallback for tutor value
+                nameElement.textContent = `${params.forename} ${params.surname}`;
+                if (tutorGroup) {
+                    nameElement.textContent += ` (${tutorGroup})`;
                 }
             }
-        });
 
-        // Update week beginning
-        if (params.date) {
-            const dateElement = document.querySelector('.week-beginning h2');
-            const date = convertExcelDateToJSDate(Number(params.date));
-            dateElement.textContent = `Week Beginning: ${date.toLocaleDateString("en-GB", {
+
+            // Update stage and tutor group
+            if (params.stage && params['tutor']) {
+                document.querySelectorAll('.info-item .body')[0].textContent = params.stage;
+                document.querySelectorAll('.info-item .body')[1].textContent = params['tutor'];
+            }
+
+            // Update attendance
+            if (params.att) {
+                const attendance = parseFloat(params.att);
+                document.querySelectorAll('.info-item .body')[2].textContent = !isNaN(attendance) ? `${attendance}%` : "N/A";
+            }
+
+            // Update attendance rating with severity highlighting
+            if (params.att_rating) {
+                const ratingElement = document.querySelectorAll('.info-item .body')[3];
+                const cleanedRating = (params.att_rating || "").trim().toLowerCase();
+
+                ratingElement.textContent = params.att_rating.trim();
+
+                // Apply background colour classes based on cleaned rating
+                switch (cleanedRating) {
+                    case "excellent":
+                        ratingElement.classList.add("attendance-rating", "excellent");
+                        break;
+                    case "very good":
+                        ratingElement.classList.add("attendance-rating", "very-good");
+                        break;
+                    case "good":
+                        ratingElement.classList.add("attendance-rating", "good");
+                        break;
+                    case "at risk":
+                        ratingElement.classList.add("attendance-rating", "at-risk");
+                        break;
+                    case "poor":
+                        ratingElement.classList.add("attendance-rating", "poor");
+                        break;
+                    case "very poor":
+                        ratingElement.classList.add("attendance-rating", "very-poor");
+                        break;
+                    default:
+                        ratingElement.textContent = "N/A";
+                        break;
+                }
+            }
+
+
+            // Update toilet visit values
+            if (params.toilet_week) {
+                document.getElementById("toiletWeek").textContent = params.toilet_week;
+            }
+
+            if (params.toilet_year) {
+                document.getElementById("toiletYear").textContent = params.toilet_year;
+            }
+
+            // Update timetable table
+            const days = ["mon", "tue", "wed", "thu", "fri"];
+            days.forEach((day, dayIndex) => {
+                for (let i = 1; i <= 7; i++) {
+                    const cellValue = params[`${day}${i}`];
+                    if (cellValue !== undefined) {
+                        const cell = document.querySelector(`tbody tr:nth-child(${dayIndex + 1}) td:nth-child(${i + 1})`);
+                        cell.textContent = cellValue || "";
+                    }
+                }
+            });
+
+            // Update week beginning
+            if (params.date) {
+                const dateElement = document.querySelector('.week-beginning h2');
+                const date = convertExcelDateToJSDate(Number(params.date));
+                dateElement.textContent = `Week Beginning: ${date.toLocaleDateString("en-GB", {
                 weekday: "long",
                 day: "numeric",
                 month: "long",
                 year: "numeric"
             })}`;
-        }
-    }
-
-    // Highlight specific characters ('T' and 'J') with styles
-    function highlightAttendanceCodes() {
-        const tableCells = document.querySelectorAll(".table-wrapper table tbody td");
-        tableCells.forEach(cell => {
-            if (cell.textContent.trim() === 'T') {
-                cell.classList.add('t-red');
-            } else if (cell.textContent.trim() === 'J') {
-                cell.classList.add('j-amber');
             }
-        });
-    }
+        }
 
-    // Function to toggle the visibility of the legend
-    function toggleLegend() {
-        const legend = document.getElementById('legendTable');
-        legend.style.display = legend.style.display === 'none' ? 'block' : 'none';
-    }
+        // Highlight specific characters ('T' and 'J') with styles
+        function highlightAttendanceCodes() {
+            const tableCells = document.querySelectorAll(".table-wrapper table tbody td");
+            tableCells.forEach(cell => {
+                if (cell.textContent.trim() === 'T') {
+                    cell.classList.add('t-red');
+                } else if (cell.textContent.trim() === 'J') {
+                    cell.classList.add('j-amber');
+                }
+            });
+        }
 
-    // Run the populateReport, highlight codes, and populateFormLink functions on page load
-    window.onload = () => {
-        populateReport();
-        highlightAttendanceCodes();
-        populateFormLink();
-    };
-</script>
+        // Function to toggle the visibility of the legend
+        function toggleLegend() {
+            const legend = document.getElementById('legendTable');
+            legend.style.display = legend.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Run the populateReport, highlight codes, and populateFormLink functions on page load
+        window.onload = () => {
+            populateReport();
+            highlightAttendanceCodes();
+            populateFormLink();
+        };
+    </script>
 
 
 
