@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>St John Ogilvie Attendance Report</title>
     <style>
+        /* ============================================================
+   BASE PAGE STYLING
+   ------------------------------------------------------------
+   Sets global font, colours, and background for the report.
+   ============================================================ */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -21,27 +26,33 @@
             background: #ffffff;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
             padding: 10px;
+            overflow: hidden;
         }
 
+
+        /* ============================================================
+   HEADER SECTION
+   ------------------------------------------------------------
+   Green school header with badge watermark.
+   ============================================================ */
         .header {
             background: #228B22;
             color: white;
             text-align: center;
             padding: 25px;
             position: relative;
-            overflow: hidden;
             border-radius: 8px;
+            overflow: hidden;
         }
 
         .header img {
-            width: 0px;
-            height: 0px;
+            width: 0;
+            /* kept intentionally based on your design */
+            height: 0;
             position: absolute;
             top: 10px;
             right: 10px;
-            border-radius: 50%;
         }
 
         .header-background {
@@ -56,16 +67,21 @@
             background-position: right center;
             opacity: 0.5;
             pointer-events: none;
-            z-index: 0;
         }
 
         .header h1,
         .header p {
             position: relative;
-            z-index: 1;
             margin: 0;
+            z-index: 1;
         }
 
+
+        /* ============================================================
+   LEARNER INFORMATION SECTION
+   ------------------------------------------------------------
+   Contains name, stage, tutor, attendance and rating tiles.
+   ============================================================ */
         .info-section {
             background: #f4f4f4;
             padding: 20px;
@@ -81,34 +97,25 @@
             margin-bottom: 10px;
         }
 
+        /* Tile layout (Stage, Tutor, Attendance, Rating) */
         .info-box {
             display: flex;
             justify-content: space-around;
-            flex-wrap: nowrap;
             gap: 15px;
+            flex-wrap: nowrap;
         }
 
-        .info-box .info-item {
-            flex: 1 1 calc(20%);
-            max-width: calc(20%);
+        .info-item {
+            flex: 1 1 20%;
+            max-width: 20%;
             min-width: 100px;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        @media (max-width: 600px) {
-            .info-box {
-                flex-wrap: wrap;
-            }
-
-            .info-box .info-item {
-                flex: 1 1 calc(50% - 15px);
-                max-width: calc(50% - 110px);
-            }
-        }
-
-        .info-box .info-item .header {
+        /* Card title */
+        .info-item .header {
             background: #228B22;
             color: white;
             font-weight: bold;
@@ -117,7 +124,8 @@
             border-top-right-radius: 8px;
         }
 
-        .info-box .info-item .body {
+        /* Card body */
+        .info-item .body {
             background: white;
             color: #333;
             padding: 10px;
@@ -127,24 +135,51 @@
             border-bottom-right-radius: 8px;
         }
 
-        hr {
-            border: 0;
-            border-top: 1px solid #ddd;
-            margin: 20px 0;
+        /* Initially hidden stage/tutor boxes */
+        #stage-box,
+        #tutor-box {
+            display: none;
         }
 
+
+        /* ============================================================
+   RESPONSIVE INFO SECTION
+   ------------------------------------------------------------
+   Adjusts tiles for mobile without changing appearance.
+   ============================================================ */
+        @media (max-width: 600px) {
+            .info-box {
+                flex-wrap: wrap;
+            }
+
+            .info-item {
+                flex: 1 1 45%;
+                max-width: 45%;
+            }
+        }
+
+
+        /* ============================================================
+   WEEK LABEL
+   ============================================================ */
         .week-beginning {
             text-align: center;
             font-size: 12px;
             font-weight: bold;
             color: #228B22;
-            margin: 0px 0;
             background: #f4f4f4;
-            padding: 0px;
+            padding: 0;
+            margin: 0;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
+
+        /* ============================================================
+   MAIN ATTENDANCE TABLE
+   ------------------------------------------------------------
+   The five day x seven periods table.
+   ============================================================ */
         .table-wrapper {
             overflow-x: auto;
         }
@@ -152,7 +187,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 0px auto;
+            margin: 0 auto;
         }
 
         th,
@@ -168,6 +203,26 @@
             color: white;
         }
 
+
+        /* ============================================================
+   ATTENDANCE CODE HIGHLIGHTING
+   ------------------------------------------------------------
+   Styles T and J codes in the timetable.
+   ============================================================ */
+        .t-red {
+            color: red;
+            font-weight: bold;
+        }
+
+        .j-amber {
+            color: #ffbf00;
+            font-weight: bold;
+        }
+
+
+        /* ============================================================
+   LEGEND TABLE
+   ============================================================ */
         .legend {
             margin-top: 10px;
         }
@@ -177,40 +232,33 @@
             margin: 20px auto;
         }
 
-        .legend th {
-            background: #228B22;
-            color: white;
-        }
-
-        .legend td {
-            text-align: left;
-        }
-
         .legend td:first-child {
-            text-align: center;
             width: 50px;
+            text-align: center;
         }
 
+
+        /* ============================================================
+   BUTTONS AND INTERACTIVE ELEMENTS
+   ============================================================ */
         .button-container {
             display: flex;
             justify-content: center;
             gap: 15px;
             flex-wrap: wrap;
-            margin-top: 20px;
+            margin-top: 0px;
         }
 
         a.button {
-            display: inline-block;
-            padding: 10px 20px;
-            background: #000000;
+            background: #000;
             color: #FFD700;
-            text-decoration: none;
-            text-align: center;
+            padding: 10px 20px;
             border-radius: 5px;
+            text-decoration: none;
         }
 
         a.button:hover {
-            background: #333333;
+            background: #333;
         }
 
         .toggle-button button {
@@ -227,6 +275,10 @@
             background: #1a6b18;
         }
 
+
+        /* ============================================================
+   ALERT SECTION (Missed Learning)
+   ============================================================ */
         .alert-section {
             background: #ffe5e5;
             color: #b22222;
@@ -236,44 +288,29 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        .alert-section h3 {
-            margin-bottom: 15px;
-        }
-
         .alert-section .key-points {
-            text-align: left;
             margin-top: 15px;
-            padding: 10px;
+            background: #fff6f6;
             border: 1px solid #b22222;
             border-radius: 8px;
-            background: #fff6f6;
+            padding: 10px;
         }
 
-        .alert-section .key-points ul {
+        .alert-section ul {
             margin: 0;
             padding-left: 20px;
         }
 
-        .alert-section .key-points ul li {
+        .alert-section ul li {
             margin-bottom: 10px;
-        }
-
-        .alert-section .missed-learning {
-            margin-top: 20px;
         }
 
         .alert-section table {
             width: 100%;
-            margin-top: 10px;
             border-collapse: collapse;
-        }
-
-        .alert-section table {
             background: white;
-            color: black;
+            margin-top: 10px;
         }
-
-
 
         .alert-section th,
         .alert-section td {
@@ -283,16 +320,14 @@
         }
 
         .alert-section th {
-            background: #228b22;
+            background: #228B22;
             color: white;
         }
 
 
-        /* ############################################################################ */
-
-
-
-
+        /* ============================================================
+   ATTENDANCE RATING BADGES
+   ============================================================ */
         .attendance-rating {
             font-weight: bold;
             padding: 5px;
@@ -301,117 +336,58 @@
         }
 
         .excellent {
-            background-color: #28a745 !important;
-            /* Bright Green */
-            color: #ffffff !important;
-            /* White text */
+            background: #28a745 !important;
+            color: white !important;
         }
 
         .very-good {
-            background-color: #7bc043 !important;
-            /* Soft Green */
-            color: #ffffff !important;
-            /* White text */
+            background: #7bc043 !important;
+            color: white !important;
         }
 
         .good {
-            background-color: #ffc107 !important;
-            /* Yellow */
-            color: #333333 !important;
-            /* Darker text for contrast */
+            background: #ffc107 !important;
+            color: #333 !important;
         }
 
         .at-risk {
-            background-color: #ff8c00 !important;
-            /* Orange */
-            color: #ffffff !important;
-            /* White text */
+            background: #ff8c00 !important;
+            color: white !important;
         }
 
         .poor {
-            background-color: #ff4c4c !important;
-            /* Bright Red */
-            color: #ffffff !important;
-            /* White text */
+            background: #ff4c4c !important;
+            color: white !important;
         }
 
         .very-poor {
-            background-color: #b22222 !important;
-            /* Dark Red */
-            color: #ffffff !important;
-            /* White text */
+            background: #b22222 !important;
+            color: white !important;
         }
 
 
-        /* ############################################################################ */
-
-
-
-        .t-red {
-            color: red;
-            font-weight: bold;
-        }
-
-        .j-amber {
-            color: #ffbf00;
-            /* Amber Colour */
-            font-weight: bold;
-        }
-
-        #stage-box,
-        #tutor-box {
-            display: none;
-            /* Ensures elements are hidden */
-        }
-
-
-
-
-        /* ############################################################################ */
-
-
-
-        .toilet-table th {
-            background: #228B22;
-            color: white;
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-
-        .toilet-table td {
-            border: 1px solid #ddd;
-            text-align: center;
-            padding: 8px;
-            font-size: 14px;
-            background: white;
-        }
-
-        .spacer {
-            margin: 15px 0;
-            /* same spacing as your <hr> */
-        }
-
-
-        /* NEW KPI TILE SECTION */
+        /* ============================================================
+   KPI TILE SECTION
+   ------------------------------------------------------------
+   Three tiles: Toilets Week, Toilets Year, Lates Year.
+   ============================================================ */
         .kpi-container {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 40px;
-            margin: 0px 0;
+            gap: 10px;
         }
 
-
         .kpi-tile {
-            flex: 0 1 20%;
-            max-width: 28%;
-            background: #ffffff;
+            flex: 0 1 25%;
+            max-width: 25%;
+            background: white;
             border: 1px solid #ddd;
             border-radius: 10px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             text-align: center;
-            padding: 12px;
+            padding: 10px;
         }
-
 
         .kpi-title {
             font-size: 14px;
@@ -424,15 +400,39 @@
             font-size: 28px;
             font-weight: bold;
             padding: 10px 0;
-            border-radius: 8px;
             background: #f4f4f4;
+            border-radius: 8px;
         }
 
-        @media(max-width: 600px) {
-            .kpi-container {
-                flex-direction: column;
+        /* Mobile layout for KPI tiles */
+        @media (max-width: 600px) {
+            .kpi-tile {
+                flex: 0 1 25%;
+                max-width: 25%;
+                padding: 8px;
+            }
+
+            .kpi-title {
+                font-size: 13px;
+            }
+
+            .kpi-value {
+                font-size: 22px;
+                padding: 6px 0;
             }
         }
+
+
+        /* ============================================================
+   SPACER
+   ------------------------------------------------------------
+   Replaces previous <hr>-style spacing between sections.
+   ============================================================ */
+        .spacer {
+            margin: 15px 0;
+        }
+
+
 
 
         /* ############################################################################ */
@@ -569,7 +569,7 @@
 
 
         </div>
-        <hr>
+        <div class="spacer"></div>
         <div class="button-container">
             <a id="formLink" href="#" class="button">Submit Absence Reason</a>
             <div class="toggle-button">
