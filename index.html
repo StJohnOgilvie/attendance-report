@@ -392,6 +392,49 @@
         }
 
 
+        /* NEW KPI TILE SECTION */
+        .kpi-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 0px 0;
+        }
+
+
+        .kpi-tile {
+            flex: 0 1 20%;
+            max-width: 28%;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 12px;
+        }
+
+
+        .kpi-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #228B22;
+        }
+
+        .kpi-value {
+            font-size: 28px;
+            font-weight: bold;
+            padding: 10px 0;
+            border-radius: 8px;
+            background: #f4f4f4;
+        }
+
+        @media(max-width: 600px) {
+            .kpi-container {
+                flex-direction: column;
+            }
+        }
+
+
         /* ############################################################################ */
     </style>
 </head>
@@ -505,22 +548,23 @@
 
 
             <div class="table-wrapper">
-                <table class="toilet-table">
-                    <thead>
-                        <tr>
-                            <th>Toilet Visits This Week</th>
-                            <th>Toilet Visits This Year</th>
-                            <th>Lates This Year</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td id="toiletWeek"><strong></strong></td>
-                            <td id="toiletYear"><strong></strong></td>
-                            <td id="latesYear"><strong></strong></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="kpi-container">
+                    <div class="kpi-tile">
+                        <div class="kpi-title">Toilet Visits This Week</div>
+                        <div class="kpi-value" id="toiletWeek">0</div>
+                    </div>
+
+                    <div class="kpi-tile">
+                        <div class="kpi-title">Toilet Visits This Year</div>
+                        <div class="kpi-value" id="toiletYear">0</div>
+                    </div>
+
+                    <div class="kpi-tile">
+                        <div class="kpi-title">Lates This Year</div>
+                        <div class="kpi-value" id="latesYear">0</div>
+                    </div>
+                </div>
+
             </div>
 
 
@@ -787,6 +831,10 @@
                 document.getElementById("toiletYear").textContent = params.toilet_year;
             }
 
+            if (params.lates_year) {
+                document.getElementById("latesYear").textContent = params.lates_year;
+            }
+
             // Update timetable table
             const days = ["mon", "tue", "wed", "thu", "fri"];
             days.forEach((day, dayIndex) => {
@@ -848,5 +896,3 @@
 </body>
 
 </html>
-
-
